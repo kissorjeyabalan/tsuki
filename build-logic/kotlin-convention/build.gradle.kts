@@ -14,23 +14,22 @@
  * limitations under the License.
  */
 
-rootProject.name = "build-logic"
+plugins {
+    `kotlin-dsl`
+}
 
-dependencyResolutionManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
-    versionCatalogs {
-        create("libs") {
-            from(files("../gradle/libs.versions.toml"))
+group = "no.kij.tsuki.buildlogic.kotlin"
+
+dependencies {
+    implementation(project(":common"))
+    implementation(libs.gradle.kotlin)
+}
+
+gradlePlugin {
+    plugins {
+        register("kotlin") {
+            id = "tsuki.kotlin"
+            implementationClass = "no.kij.tsuki.buildlogic.kotlin.KotlinLibraryConventionPlugin"
         }
     }
 }
-
-include(":common")
-include(":analysis-convention")
-include(":gradle-convention")
-include(":kotlin-convention")
-include(":android-convention")

@@ -15,5 +15,6 @@
  */
 
 plugins {
+    id("tsuki.common")
     id("tsuki.sonarqube")
 }

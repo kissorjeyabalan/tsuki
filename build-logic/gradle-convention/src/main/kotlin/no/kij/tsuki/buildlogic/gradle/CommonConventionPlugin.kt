@@ -14,23 +14,19 @@
  * limitations under the License.
  */
 
-rootProject.name = "build-logic"
+package no.kij.tsuki.buildlogic.gradle
 
-dependencyResolutionManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
-    versionCatalogs {
-        create("libs") {
-            from(files("../gradle/libs.versions.toml"))
+import no.kij.tsuki.buildlogic.ConventionPlugin
+import org.gradle.api.Project
+import org.gradle.api.tasks.Delete
+import org.gradle.kotlin.dsl.register
+
+internal class CommonConventionPlugin : ConventionPlugin {
+    override fun Project.configure() {
+        with(tasks) {
+            register<Delete>("clean") {
+                delete(buildDir)
+            }
         }
     }
 }
-
-include(":common")
-include(":analysis-convention")
-include(":gradle-convention")
-include(":kotlin-convention")
-include(":android-convention")
