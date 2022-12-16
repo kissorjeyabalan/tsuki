@@ -9,7 +9,7 @@ hilt = "2.44.2"
 hiltx = "1.0.0"
 kotlin = "1.7.22"
 orbit = "4.5.0"
-sentry = "6.9.2"
+sentry = "6.10.0"
 sonarqube = "3.5.0.2730"
 
 [plugins]
