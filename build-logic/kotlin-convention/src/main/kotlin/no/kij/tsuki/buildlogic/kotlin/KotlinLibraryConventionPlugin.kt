@@ -14,27 +14,34 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.buildlogic.gradle
+package no.kij.tsuki.buildlogic.kotlin
 
-import io.sentry.android.gradle.extensions.SentryPluginExtension
 import no.kij.tsuki.buildlogic.ConventionPlugin
+import no.kij.tsuki.buildlogic.catalogBundle
+import no.kij.tsuki.buildlogic.commonExtensions
+import no.kij.tsuki.buildlogic.commonTasks
+import no.kij.tsuki.buildlogic.implementation
+import no.kij.tsuki.buildlogic.kapt
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
-import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.dependencies
 
-internal class SentryConventionPlugin : ConventionPlugin {
+
+internal class KotlinLibraryConventionPlugin : ConventionPlugin {
     override fun Project.configure() {
-        apply(plugin = "io.sentry.android.gradle")
+        apply(plugin = "org.jetbrains.kotlin.jvm")
+        apply(plugin = "org.jetbrains.kotlin.kapt")
+        apply(plugin = "tsuki.sonarqube.kotlin")
 
-        extensions.configure<SentryPluginExtension> {
-            autoInstallation.enabled.set(false)
-            autoUploadProguardMapping.set(true)
-            experimentalGuardsquareSupport.set(false)
-            ignoredBuildTypes.set(setOf("debug"))
-            includeNativeSources.set(false)
-            includeProguardMapping.set(true)
-            tracingInstrumentation.enabled.set(false)
-            uploadNativeSymbols.set(false)
+        extensions.commonExtensions()
+
+        with(tasks) {
+            commonTasks()
+        }
+
+        dependencies {
+            implementation(catalogBundle("common"))
+            kapt(catalogBundle("kapt"))
         }
     }
 }
