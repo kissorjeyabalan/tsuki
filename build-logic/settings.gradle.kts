@@ -14,40 +14,19 @@
  * limitations under the License.
  */
 
-rootProject.name = "Tsuki"
+rootProject.name = "build-logic"
 
-pluginManagement {
-    includeBuild("build-logic")
+dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
         gradlePluginPortal()
     }
-}
-
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
+    versionCatalogs {
+        create("libs") {
+            from(files("../gradle/libs.versions.toml"))
+        }
     }
 }
 
-plugins {
-    id("com.gradle.enterprise") version "3.12"
-}
-
-gradleEnterprise {
-    buildScan {
-        termsOfServiceUrl = "https://gradle.com/terms-of-service"
-        termsOfServiceAgree = "yes"
-    }
-}
-
-listOf<String>().forEach { dir ->
-    rootDir.resolve(dir).walkTopDown().maxDepth(1).filter { file ->
-        file.isDirectory && file.resolve("build.gradle.kts").exists()
-    }.forEach { module ->
-        include(":${dir.replace('/', ':')}:${module.name}")
-    }
-}
+include(":common")

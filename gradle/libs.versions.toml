@@ -1,0 +1,10 @@
+[versions]
+agp = "7.3.1"
+kotlin = "1.7.21"
+sonarqube = "3.4.0.2513"
+
+[libraries]
+# gradle
+gradle-android = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+gradle-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+gradle-sonarqube = { module = "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin", version = "sonarqube" }
