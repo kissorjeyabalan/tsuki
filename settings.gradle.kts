@@ -51,3 +51,6 @@ listOf<String>().forEach { dir ->
         include(":${dir.replace('/', ':')}:${module.name}")
     }
 }
+
+enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")

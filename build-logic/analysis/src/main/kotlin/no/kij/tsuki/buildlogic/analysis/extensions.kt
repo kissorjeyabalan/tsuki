@@ -14,20 +14,17 @@
  * limitations under the License.
  */
 
-rootProject.name = "build-logic"
+package no.kij.tsuki.buildlogic.analysis
 
-dependencyResolutionManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
-    versionCatalogs {
-        create("libs") {
-            from(files("../gradle/libs.versions.toml"))
-        }
+import org.sonarqube.gradle.SonarProperties
+import java.io.File
+
+internal fun SonarProperties.addFileIfExists(property: String, vararg paths: String) {
+    paths.filter { file ->
+        File(file).exists()
+    }.takeUnless { files ->
+        files.isEmpty()
+    }?.joinToString(separator = ",")?.let { files ->
+        property(property, files)
     }
 }
-
-include(":common")
-include(":analysis")
