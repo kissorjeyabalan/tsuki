@@ -1,10 +1,17 @@
 [versions]
 agp = "7.3.1"
-kotlin = "1.7.22"
+kotlin = "1.7.21"
+sentry = "6.9.2"
 sonarqube = "3.5.0.2730"
 
 [libraries]
 # gradle
 gradle-android = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 gradle-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+gradle-sentry = { module = "io.sentry:sentry-android-gradle-plugin", version = "3.3.0" }
 gradle-sonarqube = { module = "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin", version.ref = "sonarqube" }
+
+# sentry
+sentry = { module = "io.sentry:sentry-android-core", version.ref = "sentry" }
+sentry-apollo = { module = "io.sentry:sentry-apollo-3", version.ref = "sentry" }
+sentry-compose = { module = "io.sentry:sentry-compose-android", version.ref = "sentry" }

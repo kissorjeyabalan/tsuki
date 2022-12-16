@@ -14,7 +14,19 @@
  * limitations under the License.
  */
 
-plugins {
-    id("tsuki.common")
-    id("tsuki.sonarqube")
+package no.kij.tsuki.buildlogic.gradle
+
+import no.kij.tsuki.buildlogic.ConventionPlugin
+import org.gradle.api.Project
+import org.gradle.api.tasks.Delete
+import org.gradle.kotlin.dsl.register
+
+internal class CommonConventionPlugin : ConventionPlugin {
+    override fun Project.configure() {
+        with(tasks) {
+            register<Delete>("clean") {
+                delete(buildDir)
+            }
+        }
+    }
 }

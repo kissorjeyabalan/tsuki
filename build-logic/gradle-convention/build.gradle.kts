@@ -15,6 +15,26 @@
  */
 
 plugins {
-    id("tsuki.common")
-    id("tsuki.sonarqube")
+    `kotlin-dsl`
+}
+
+group = "no.kij.tsuki.buildlogic.gradle"
+
+dependencies {
+    implementation(project(":common"))
+    implementation(libs.gradle.kotlin)
+    implementation(libs.gradle.sentry)
+}
+
+gradlePlugin {
+    plugins {
+        register("common") {
+            id = "tsuki.common"
+            implementationClass = "no.kij.tsuki.buildlogic.gradle.CommonConventionPlugin"
+        }
+        register("sentry") {
+            id = "tsuki.sentry"
+            implementationClass = "no.kij.tsuki.buildlogic.gradle.SentryConventionPlugin"
+        }
+    }
 }

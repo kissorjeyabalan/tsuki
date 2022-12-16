@@ -31,3 +31,4 @@ dependencyResolutionManagement {
 
 include(":common")
 include(":analysis")
+include(":gradle-convention")
