@@ -31,6 +31,5 @@ dependencyResolutionManagement {
 
 include(":common")
 include(":analysis-convention")
-include(":gradle-convention")
 include(":kotlin-convention")
 include(":android-convention")

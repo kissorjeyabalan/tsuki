@@ -15,6 +15,9 @@
  */
 
 plugins {
-    id("tsuki.common")
     id("tsuki.sonarqube")
+}
+
+tasks.register("clean", Delete::class) {
+    delete(rootProject.buildDir)
 }

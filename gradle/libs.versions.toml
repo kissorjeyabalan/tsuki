@@ -9,7 +9,6 @@ hilt = "2.44.2"
 hiltx = "1.0.0"
 kotlin = "1.7.22"
 orbit = "4.5.0"
-sentry = "6.9.2"
 sonarqube = "3.5.0.2730"
 
 [plugins]
@@ -59,7 +58,6 @@ gradle-android = { module = "com.android.tools.build:gradle", version.ref = "agp
 gradle-hilt = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt" }
 gradle-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 gradle-ksp = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin", version = "1.7.22-1.0.8" }
-gradle-sentry = { module = "io.sentry:sentry-android-gradle-plugin", version = "3.3.0" }
 gradle-sonarqube = { module = "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin", version.ref = "sonarqube" }
 
 # Hilt
@@ -85,11 +83,6 @@ kotlin-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutab
 
 # Lifecycle
 lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version = "2.5.1" }
-
-# sentry
-sentry = { module = "io.sentry:sentry-android-core", version.ref = "sentry" }
-sentry-apollo = { module = "io.sentry:sentry-apollo-3", version.ref = "sentry" }
-sentry-compose = { module = "io.sentry:sentry-compose-android", version.ref = "sentry" }
 
 [bundles]
 common = [
@@ -128,8 +121,6 @@ app = [
     "hiltx-navigation",
     "orbit",
     "orbit-compose",
-    "sentry",
-    "sentry-compose",
 ]
 
 ui-compose = [
