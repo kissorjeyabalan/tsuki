@@ -14,19 +14,16 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.buildlogic.gradle
+plugins {
+    id("tsuki.android.library")
+}
 
-import no.kij.tsuki.buildlogic.ConventionPlugin
-import org.gradle.api.Project
-import org.gradle.api.tasks.Delete
-import org.gradle.kotlin.dsl.register
+android.namespace = "no.kij.tsuki.core.logging"
 
-internal class CommonConventionPlugin : ConventionPlugin {
-    override fun Project.configure() {
-        with(tasks) {
-            register<Delete>("clean") {
-                delete(buildDir)
-            }
-        }
-    }
+dependencies {
+    api(projects.domain.base)
+
+    implementation(libs.timber)
+    implementation(libs.sentry)
+    implementation(libs.sentry.timber)
 }

@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="1.6">
+    <bytecodeTargetLevel target="11">
       <module name="build-logic.analysis" target="17" />
       <module name="build-logic.analysis.main" target="17" />
       <module name="build-logic.analysis.test" target="17" />
+      <module name="build-logic.gradle-convention" target="17" />
+      <module name="build-logic.gradle-convention.main" target="17" />
+      <module name="build-logic.gradle-convention.test" target="17" />
       <module name="build-logic.main" target="17" />
       <module name="build-logic.test" target="17" />
     </bytecodeTargetLevel>

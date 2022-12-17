@@ -14,22 +14,19 @@
  * limitations under the License.
  */
 
-rootProject.name = "build-logic"
+package no.kij.tsuki.ui.main
 
-dependencyResolutionManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
-    versionCatalogs {
-        create("libs") {
-            from(files("../gradle/libs.versions.toml"))
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
+internal class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+
         }
     }
 }
-
-include(":common")
-include(":analysis-convention")
-include(":kotlin-convention")
-include(":android-convention")

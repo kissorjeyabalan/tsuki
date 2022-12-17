@@ -1,3 +1,4 @@
+@file:Suppress("DSL_SCOPE_VIOLATION")
 /*
  * Copyright (C) 2022 Kissor Jeyabalan
  *
@@ -15,6 +16,12 @@
  */
 
 plugins {
-    id("tsuki.common")
     id("tsuki.sonarqube")
+    alias(libs.plugins.hilt) apply false
+    alias(libs.plugins.kapt) apply false
+    alias(libs.plugins.ksp) apply false
+}
+
+tasks.register("clean", Delete::class) {
+    delete(rootProject.buildDir)
 }

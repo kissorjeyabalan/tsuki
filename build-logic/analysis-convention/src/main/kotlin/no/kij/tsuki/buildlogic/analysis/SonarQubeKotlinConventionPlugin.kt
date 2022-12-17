@@ -25,7 +25,6 @@ internal class SonarQubeKotlinConventionPlugin : ConventionPlugin {
     override fun Project.configure() {
         extensions.configure<SonarExtension> {
             properties {
-                addFileIfExists("sonar.coverage.jacoco.xmlReportPaths", "$buildDir/reports/kover/xml/report.xml")
                 addFileIfExists("sonar.java.binaries", "$buildDir/classes/kotlin")
                 addFileIfExists("sonar.junit.reportPaths", "$buildDir/test-results/test")
                 addFileIfExists("sonar.sources", "$projectDir/src/main/kotlin")

@@ -14,22 +14,16 @@
  * limitations under the License.
  */
 
-rootProject.name = "build-logic"
+package no.kij.tsuki.initializers
 
-dependencyResolutionManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
+import android.content.Context
+import androidx.startup.Initializer
+
+class DependencyGraphInitializer : Initializer<Unit> {
+    override fun create(context: Context) {
+        InitializerEntryPoint.resolve(context)
+        return Unit
     }
-    versionCatalogs {
-        create("libs") {
-            from(files("../gradle/libs.versions.toml"))
-        }
-    }
+
+    override fun dependencies() = emptyList<Class<out Initializer<*>>>()
 }
-
-include(":common")
-include(":analysis-convention")
-include(":kotlin-convention")
-include(":android-convention")

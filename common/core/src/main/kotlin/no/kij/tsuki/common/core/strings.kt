@@ -14,22 +14,10 @@
  * limitations under the License.
  */
 
-rootProject.name = "build-logic"
+package no.kij.tsuki.common.core
 
-dependencyResolutionManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
-    versionCatalogs {
-        create("libs") {
-            from(files("../gradle/libs.versions.toml"))
-        }
-    }
-}
-
-include(":common")
-include(":analysis-convention")
-include(":kotlin-convention")
-include(":android-convention")
+val String.Companion.empty get() = ""
+val String.Companion.dot get() = "."
+val String.Companion.comma get() = ","
+val String.Companion.dash get() = "-"
+val String.Companion.unknown get() = "?"

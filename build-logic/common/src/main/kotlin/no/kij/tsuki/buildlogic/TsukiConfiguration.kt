@@ -19,7 +19,7 @@ package no.kij.tsuki.buildlogic
 import org.gradle.api.JavaVersion
 
 object TsukiConfiguration {
-    const val minSdk = 26
+    const val minSdk = 21
     const val targetSdk = 33
     const val compileSdk = 33
     const val buildTools = "33.0.0"

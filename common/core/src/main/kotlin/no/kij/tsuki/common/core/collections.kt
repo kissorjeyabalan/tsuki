@@ -14,22 +14,9 @@
  * limitations under the License.
  */
 
-rootProject.name = "build-logic"
+package no.kij.tsuki.common.core
 
-dependencyResolutionManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
-    versionCatalogs {
-        create("libs") {
-            from(files("../gradle/libs.versions.toml"))
-        }
-    }
-}
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 
-include(":common")
-include(":analysis-convention")
-include(":kotlin-convention")
-include(":android-convention")
+inline fun <reified T> ImmutableList<T>?.orEmpty() = this ?: persistentListOf()

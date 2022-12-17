@@ -14,22 +14,20 @@
  * limitations under the License.
  */
 
-rootProject.name = "build-logic"
+package no.kij.tsuki.core.logging.di
 
-dependencyResolutionManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
-    versionCatalogs {
-        create("libs") {
-            from(files("../gradle/libs.versions.toml"))
-        }
-    }
+import dagger.Binds
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import no.kij.tsuki.core.logging.TsukiLogger
+import no.kij.tsuki.domain.base.logger.Logger
+import javax.inject.Singleton
+
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class LoggerModule {
+    @Binds
+    @Singleton
+    internal abstract fun provideLogger(bind: TsukiLogger): Logger
 }
-
-include(":common")
-include(":analysis-convention")
-include(":kotlin-convention")
-include(":android-convention")

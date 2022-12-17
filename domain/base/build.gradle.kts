@@ -14,22 +14,10 @@
  * limitations under the License.
  */
 
-rootProject.name = "build-logic"
-
-dependencyResolutionManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
-    versionCatalogs {
-        create("libs") {
-            from(files("../gradle/libs.versions.toml"))
-        }
-    }
+plugins {
+    id("tsuki.kotlin")
 }
 
-include(":common")
-include(":analysis-convention")
-include(":kotlin-convention")
-include(":android-convention")
+dependencies {
+    implementation(projects.common.core)
+}

@@ -14,22 +14,10 @@
  * limitations under the License.
  */
 
-rootProject.name = "build-logic"
+package no.kij.tsuki
 
-dependencyResolutionManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
-    versionCatalogs {
-        create("libs") {
-            from(files("../gradle/libs.versions.toml"))
-        }
-    }
-}
+import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 
-include(":common")
-include(":analysis-convention")
-include(":kotlin-convention")
-include(":android-convention")
+@HiltAndroidApp
+internal class TsukiApp : Application()

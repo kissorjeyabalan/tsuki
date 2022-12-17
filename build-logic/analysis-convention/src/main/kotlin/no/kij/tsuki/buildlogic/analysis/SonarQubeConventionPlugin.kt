@@ -30,19 +30,6 @@ internal class SonarQubeConventionPlugin : ConventionPlugin {
         "**/BuildConfig.*"
     )
 
-    private val coverageExclusions = listOf(
-        "**/TsukiApp.kt",
-        "**/initializers/**",
-        "**/common/**",
-        "**Activity.kt",
-        "**Fragment.kt",
-        "**/base/**",
-        "**/navigation/**",
-        "**/di/**",
-        "**/ui/**/components/**",
-        "**/ui/**/view/**",
-    )
-
     override fun Project.configure() {
         apply(plugin = "org.sonarqube")
 
@@ -56,7 +43,6 @@ internal class SonarQubeConventionPlugin : ConventionPlugin {
                     "sonar.projectVersion",
                     "${TsukiConfiguration.versionName}_(${TsukiConfiguration.versionCode})"
                 )
-                property("sonar.coverage.exclusions", coverageExclusions.joinToString(separator = ","))
                 property("sonar.exclusions", codeExclusions.joinToString(separator = ","))
                 property("sonar.java.coveragePlugin", "jacoco")
                 property("sonar.kotlin.detekt.reportPaths", "${rootProject.buildDir}/reports/detekt/detekt.xml")

@@ -15,26 +15,28 @@
  */
 
 plugins {
-    `kotlin-dsl`
+    id("tsuki.android.application")
+    id("tsuki.sonarqube.android")
+    id("io.sentry.android.gradle") version "3.3.0"
 }
 
-group = "no.kij.tsuki.buildlogic.gradle"
+sentry {
+    autoInstallation.enabled.set(false)
+    autoUploadProguardMapping.set(true)
+    experimentalGuardsquareSupport.set(false)
+    ignoredBuildTypes.set(setOf("debug"))
+    includeNativeSources.set(false)
+    includeProguardMapping.set(true)
+    tracingInstrumentation.enabled.set(false)
+    uploadNativeSymbols.set(false)
+}
 
 dependencies {
-    implementation(project(":common"))
-    implementation(libs.gradle.kotlin)
-    implementation(libs.gradle.sentry)
-}
+    implementation(projects.common.core)
 
-gradlePlugin {
-    plugins {
-        register("common") {
-            id = "tsuki.common"
-            implementationClass = "no.kij.tsuki.buildlogic.gradle.CommonConventionPlugin"
-        }
-        register("sentry") {
-            id = "tsuki.sentry"
-            implementationClass = "no.kij.tsuki.buildlogic.gradle.SentryConventionPlugin"
-        }
-    }
+    implementation(projects.core.logging)
+
+    implementation(projects.domain.base)
+
+    implementation(libs.sentry)
 }

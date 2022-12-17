@@ -14,22 +14,20 @@
  * limitations under the License.
  */
 
-rootProject.name = "build-logic"
+package no.kij.tsuki.common.core
 
-dependencyResolutionManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
-    versionCatalogs {
-        create("libs") {
-            from(files("../gradle/libs.versions.toml"))
-        }
-    }
-}
+val Int.Companion.zero inline get() = 0
+fun Int?.or(default: Int) = this ?: default
+fun Int?.orZero() = or(Int.zero)
 
-include(":common")
-include(":analysis-convention")
-include(":kotlin-convention")
-include(":android-convention")
+val Long.Companion.zero inline get() = 0L
+fun Long?.or(default: Long) = this ?: default
+fun Long?.orZero() = or(Long.zero)
+
+val Double.Companion.zero inline get() = 0.0
+fun Double?.or(default: Double) = this ?: default
+fun Double?.orZero() = or(Double.zero)
+
+val Float.Companion.zero inline get() = 0.0f
+fun Float?.or(default: Float) = this ?: default
+fun Float?.orZero() = or(Float.zero)
