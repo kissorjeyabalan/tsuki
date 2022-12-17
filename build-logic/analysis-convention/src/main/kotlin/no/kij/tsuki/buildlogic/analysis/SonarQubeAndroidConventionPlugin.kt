@@ -26,7 +26,6 @@ internal class SonarQubeAndroidConventionPlugin : ConventionPlugin {
         extensions.configure<SonarExtension> {
             properties {
                 addFileIfExists("sonar.android.lint.report", "$buildDir/reports/lint-results-debug.xml")
-                addFileIfExists("sonar.coverage.jacoco.xmlReportPaths", "$buildDir/reports/kover/xml/report.xml")
                 addFileIfExists("sonar.java.binaries", "$buildDir/tmp/kotlin-classes/debug")
                 addFileIfExists("sonar.junit.reportPaths", "$buildDir/test-results/testDebugUnitTest")
                 addFileIfExists("sonar.sources", "$projectDir/src/main/kotlin")
