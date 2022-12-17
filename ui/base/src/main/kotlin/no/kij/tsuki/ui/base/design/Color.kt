@@ -20,9 +20,10 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.graphics.Color
 
-// Seed: d87683 / 0xFFD87683
+// Seed: #d87683 /
 // Surface Tint Color: Color(0xFF9B404F)
 // Shadow: Color(0xFF000000)
+private val seed = Color(0xFFD87683)
 internal val LightColors = lightColorScheme(
     primary = Color(0xFF9B404F),
     onPrimary = Color(0xFFFFFFFF),
