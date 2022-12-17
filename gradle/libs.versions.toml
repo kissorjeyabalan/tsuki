@@ -70,9 +70,6 @@ hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hil
 hiltx-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hiltx" }
 hiltx-navigation = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltx" }
 
-# Napier
-napier = { module = "io.github.aakira:napier", version = "2.6.1" }
-
 # Orbit
 orbit = { module = "org.orbit-mvi:orbit-viewmodel", version.ref = "orbit" }
 orbit-compose = { module = "org.orbit-mvi:orbit-compose", version.ref = "orbit" }
@@ -99,7 +96,6 @@ common-android = [
     "hilt-android",
     "kotlin",
     "kotlin-immutable",
-    "napier",
 ]
 
 kapt = [
