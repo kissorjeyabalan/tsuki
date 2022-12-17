@@ -9,6 +9,7 @@ hilt = "2.44.2"
 hiltx = "1.0.0"
 kotlin = "1.7.22"
 orbit = "4.5.0"
+sentry = "6.10.0"
 sonarqube = "3.5.0.2730"
 
 [plugins]
@@ -70,16 +71,26 @@ hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hil
 hiltx-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hiltx" }
 hiltx-navigation = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltx" }
 
-# Orbit
-orbit = { module = "org.orbit-mvi:orbit-viewmodel", version.ref = "orbit" }
-orbit-compose = { module = "org.orbit-mvi:orbit-compose", version.ref = "orbit" }
-
 # Kotlin
 kotlin = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 kotlin-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version = "0.3.5" }
 
 # Lifecycle
 lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version = "2.5.1" }
+
+# Orbit
+orbit = { module = "org.orbit-mvi:orbit-viewmodel", version.ref = "orbit" }
+orbit-compose = { module = "org.orbit-mvi:orbit-compose", version.ref = "orbit" }
+
+# Sentry
+sentry = { module = "io.sentry:sentry-android", version.ref = "sentry" }
+sentry-apollo = { module = "io.sentry:sentry-apollo-3", version.ref = "sentry" }
+sentry-compose = { module = "io.sentry:sentry-compose-android", version.ref = "sentry" }
+sentry-timber = { module = "io.sentry:sentry-android-timber", version.ref = "sentry" }
+
+# Timber
+timber = { module = "com.jakewharton.timber:timber", version = "5.0.1" }
+
 
 [bundles]
 common = [

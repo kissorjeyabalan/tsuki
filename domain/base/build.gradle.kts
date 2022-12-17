@@ -14,20 +14,10 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.buildlogic
+plugins {
+    id("tsuki.kotlin")
+}
 
-import org.gradle.api.JavaVersion
-
-object TsukiConfiguration {
-    const val minSdk = 21
-    const val targetSdk = 33
-    const val compileSdk = 33
-    const val buildTools = "33.0.0"
-    const val packageName = "no.kij.tsuki"
-    const val versionName = "0.0.1"
-    const val versionCode = 1
-
-    val javaVersion = JavaVersion.VERSION_11
-    const val jvmTarget = "11"
-    const val kotlinVersion = "1.7"
+dependencies {
+    implementation(projects.common.core)
 }

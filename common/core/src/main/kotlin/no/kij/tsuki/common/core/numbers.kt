@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.buildlogic
+package no.kij.tsuki.common.core
 
-import org.gradle.api.JavaVersion
+val Int.Companion.zero inline get() = 0
+fun Int?.or(default: Int) = this ?: default
+fun Int?.orZero() = or(Int.zero)
 
-object TsukiConfiguration {
-    const val minSdk = 21
-    const val targetSdk = 33
-    const val compileSdk = 33
-    const val buildTools = "33.0.0"
-    const val packageName = "no.kij.tsuki"
-    const val versionName = "0.0.1"
-    const val versionCode = 1
+val Long.Companion.zero inline get() = 0L
+fun Long?.or(default: Long) = this ?: default
+fun Long?.orZero() = or(Long.zero)
 
-    val javaVersion = JavaVersion.VERSION_11
-    const val jvmTarget = "11"
-    const val kotlinVersion = "1.7"
-}
+val Double.Companion.zero inline get() = 0.0
+fun Double?.or(default: Double) = this ?: default
+fun Double?.orZero() = or(Double.zero)
+
+val Float.Companion.zero inline get() = 0.0f
+fun Float?.or(default: Float) = this ?: default
+fun Float?.orZero() = or(Float.zero)

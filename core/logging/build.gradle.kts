@@ -14,20 +14,16 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.buildlogic
+plugins {
+    id("tsuki.android.library")
+}
 
-import org.gradle.api.JavaVersion
+android.namespace = "no.kij.tsuki.core.logging"
 
-object TsukiConfiguration {
-    const val minSdk = 21
-    const val targetSdk = 33
-    const val compileSdk = 33
-    const val buildTools = "33.0.0"
-    const val packageName = "no.kij.tsuki"
-    const val versionName = "0.0.1"
-    const val versionCode = 1
+dependencies {
+    api(projects.domain.base)
 
-    val javaVersion = JavaVersion.VERSION_11
-    const val jvmTarget = "11"
-    const val kotlinVersion = "1.7"
+    implementation(libs.timber)
+    implementation(libs.sentry)
+    implementation(libs.sentry.timber)
 }

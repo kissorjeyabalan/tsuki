@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.buildlogic
+package no.kij.tsuki.core.logging.di
 
-import org.gradle.api.JavaVersion
+import dagger.Binds
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import no.kij.tsuki.core.logging.TsukiLogger
+import no.kij.tsuki.domain.base.logger.Logger
+import javax.inject.Singleton
 
-object TsukiConfiguration {
-    const val minSdk = 21
-    const val targetSdk = 33
-    const val compileSdk = 33
-    const val buildTools = "33.0.0"
-    const val packageName = "no.kij.tsuki"
-    const val versionName = "0.0.1"
-    const val versionCode = 1
-
-    val javaVersion = JavaVersion.VERSION_11
-    const val jvmTarget = "11"
-    const val kotlinVersion = "1.7"
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class LoggerModule {
+    @Binds
+    @Singleton
+    internal abstract fun provideLogger(bind: TsukiLogger): Logger
 }
