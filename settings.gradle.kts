@@ -44,6 +44,8 @@ gradleEnterprise {
     }
 }
 
+include(":app")
+
 listOf<String>("common", "core", "domain").forEach { dir ->
     rootDir.resolve(dir).walkTopDown().maxDepth(1).filter { file ->
         file.isDirectory && file.resolve("build.gradle.kts").exists()
