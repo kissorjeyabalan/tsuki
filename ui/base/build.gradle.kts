@@ -13,32 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import no.kij.tsuki.buildlogic.TsukiConfiguration
 
 plugins {
-    id("tsuki.android.application")
-    id("tsuki.sonarqube.android")
-    id("io.sentry.android.gradle") version "3.3.0"
+    id("tsuki.android.compose")
 }
 
-sentry {
-    autoInstallation.enabled.set(false)
-    autoUploadProguardMapping.set(true)
-    experimentalGuardsquareSupport.set(false)
-    ignoredBuildTypes.set(setOf("debug"))
-    includeNativeSources.set(false)
-    includeProguardMapping.set(true)
-    tracingInstrumentation.enabled.set(false)
-    uploadNativeSymbols.set(false)
-}
+android.namespace = "${TsukiConfiguration.packageName}.ui.base"
 
 dependencies {
     implementation(projects.common.core)
-
-    implementation(projects.core.logging)
-
-    implementation(projects.domain.base)
-
-    implementation(projects.ui.base)
-
-    implementation(libs.sentry)
 }

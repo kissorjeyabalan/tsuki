@@ -18,11 +18,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <!--android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@string/ic_launcher_round"-->
-
     <application
         android:name=".TsukiApp"
+        android:icon="@mipmap/ic_launcher"
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="false"
