@@ -37,8 +37,11 @@ dependencies {
     implementation(projects.core.logging)
 
     implementation(projects.domain.base)
+    implementation(projects.domain.session)
+    implementation(projects.domain.user)
 
     implementation(projects.ui.base)
+    implementation(projects.ui.login)
 
     implementation(libs.sentry)
 }
