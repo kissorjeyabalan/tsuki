@@ -60,7 +60,7 @@ destinations-compiler = { module = "io.github.raamcosta.compose-destinations:ksp
 gradle-android = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 gradle-hilt = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt" }
 gradle-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-gradle-ksp = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin", version = "1.7.21-1.0.8" }
+gradle-ksp = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin", version = "1.7.22-1.0.8" }
 gradle-sonarqube = { module = "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin", version.ref = "sonarqube" }
 
 # Hilt
