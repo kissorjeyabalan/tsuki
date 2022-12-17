@@ -130,6 +130,8 @@ app = [
     "hiltx-navigation",
     "orbit",
     "orbit-compose",
+    "sentry",
+    "sentry-compose"
 ]
 
 ui-compose = [
