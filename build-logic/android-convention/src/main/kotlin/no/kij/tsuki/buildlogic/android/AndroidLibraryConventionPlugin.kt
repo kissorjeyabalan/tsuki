@@ -34,9 +34,9 @@ internal class AndroidLibraryConventionPlugin : ConventionPlugin {
     override fun Project.configure() {
         apply(plugin = "com.android.library")
         apply(plugin = "org.jetbrains.kotlin.android")
-        apply(plugin = "org.jetbrains.kotlin.kapt")
         apply(plugin = "com.google.dagger.hilt.android")
         apply(plugin = "tsuki.sonarqube.android")
+        apply(plugin = "org.jetbrains.kotlin.kapt")
 
         with(extensions) {
             commonAndroidExtensions()

@@ -30,8 +30,8 @@ import org.gradle.kotlin.dsl.dependencies
 internal class KotlinLibraryConventionPlugin : ConventionPlugin {
     override fun Project.configure() {
         apply(plugin = "org.jetbrains.kotlin.jvm")
-        apply(plugin = "org.jetbrains.kotlin.kapt")
         apply(plugin = "tsuki.sonarqube.kotlin")
+        apply(plugin = "org.jetbrains.kotlin.kapt")
 
         extensions.commonExtensions()
 
