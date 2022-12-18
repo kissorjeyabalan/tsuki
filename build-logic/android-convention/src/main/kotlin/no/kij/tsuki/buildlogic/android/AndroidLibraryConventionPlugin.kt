@@ -19,7 +19,9 @@ package no.kij.tsuki.buildlogic.android
 import com.android.build.gradle.LibraryExtension
 import no.kij.tsuki.buildlogic.ConventionPlugin
 import no.kij.tsuki.buildlogic.catalogBundle
+import no.kij.tsuki.buildlogic.catalogLib
 import no.kij.tsuki.buildlogic.commonTasks
+import no.kij.tsuki.buildlogic.desugar
 import no.kij.tsuki.buildlogic.implementation
 import no.kij.tsuki.buildlogic.kapt
 import org.gradle.api.Project
@@ -45,6 +47,7 @@ internal class AndroidLibraryConventionPlugin : ConventionPlugin {
         dependencies {
             implementation(catalogBundle("common-android"))
             kapt(catalogBundle("kapt"))
+            desugar(catalogLib("desugaring"))
         }
     }
 }

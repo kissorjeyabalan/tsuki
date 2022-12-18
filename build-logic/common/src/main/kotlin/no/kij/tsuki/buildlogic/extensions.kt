@@ -52,6 +52,9 @@ fun DependencyHandlerScope.kapt(provider: Provider<*>) =
 fun DependencyHandlerScope.ksp(provider: Provider<*>) =
     addProvider("ksp", provider)
 
+fun DependencyHandlerScope.desugar(provider: Provider<*>) =
+    addProvider("coreLibraryDesugaring", provider)
+
 fun ExtensionContainer.commonExtensions() {
     configure<JavaPluginExtension> {
         toolchain {

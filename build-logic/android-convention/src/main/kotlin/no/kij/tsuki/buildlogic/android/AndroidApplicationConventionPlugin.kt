@@ -23,6 +23,7 @@ import no.kij.tsuki.buildlogic.TsukiConfiguration
 import no.kij.tsuki.buildlogic.catalogBundle
 import no.kij.tsuki.buildlogic.catalogLib
 import no.kij.tsuki.buildlogic.commonTasks
+import no.kij.tsuki.buildlogic.desugar
 import no.kij.tsuki.buildlogic.implementation
 import no.kij.tsuki.buildlogic.kapt
 import org.gradle.api.Project
@@ -49,8 +50,8 @@ internal class AndroidApplicationConventionPlugin : ConventionPlugin {
             implementation(platform(catalogLib("compose-bom")))
             implementation(catalogBundle("common-android"))
             implementation(catalogBundle("app"))
-
             kapt(catalogBundle("kapt-ui"))
+            desugar(catalogLib("desugaring"))
         }
     }
 
