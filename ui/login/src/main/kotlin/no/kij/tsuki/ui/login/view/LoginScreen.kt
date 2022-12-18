@@ -69,7 +69,6 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.Placeholder
@@ -182,7 +181,7 @@ internal fun Header(modifier: Modifier = Modifier) {
         modifier = modifier
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(text = "つき - Tsuki")
+            Text(text = "つき", fontSize = MaterialTheme.typography.displayLarge.fontSize )
         }
     }
 }
@@ -337,11 +336,12 @@ private fun BeginLoginButton(modifier: Modifier = Modifier) {
 
     Button(
         modifier = modifier,
+        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
         onClick = { uriHandler.openUri(ANILIST_LOGIN) }
     ) {
         Text(
             text = stringResource(id = R.string.begin_login_button),
-            color = MaterialTheme.colorScheme.onSurface
+            color = MaterialTheme.colorScheme.onPrimary
         )
     }
 }
