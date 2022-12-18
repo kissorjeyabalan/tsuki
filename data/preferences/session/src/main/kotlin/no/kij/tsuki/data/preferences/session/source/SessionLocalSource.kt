@@ -14,13 +14,19 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.domain.session.failure
+package no.kij.tsuki.data.preferences.session.source
 
+import arrow.core.Either
+import arrow.core.Option
+import kotlinx.coroutines.flow.Flow
 import no.kij.tsuki.domain.base.failure.Failure
+import no.kij.tsuki.domain.session.model.AnilistToken
 
-sealed interface SessionFailure : Failure {
-    object CheckingActiveSession : SessionFailure
-    object SavingSession : SessionFailure
-    object ClearingSession : SessionFailure
-    object DeletingToken : SessionFailure
+internal interface SessionLocalSource {
+    val sessionActive: Flow<Either<Failure, Boolean>>
+
+    suspend fun saveSession(anilistToken: AnilistToken): Either<Failure, Unit>
+    suspend fun clearActiveSession(): Either<Failure, Unit>
+    suspend fun getAnilistToken(): Option<AnilistToken>
+    suspend fun deleteAnilistToken(): Either<Failure, Unit>
 }

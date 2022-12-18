@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.domain.session.failure
+package no.kij.tsuki.data.preferences.session.model
 
-import no.kij.tsuki.domain.base.failure.Failure
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-sealed interface SessionFailure : Failure {
-    object CheckingActiveSession : SessionFailure
-    object SavingSession : SessionFailure
-    object ClearingSession : SessionFailure
-    object DeletingToken : SessionFailure
-}
+@Serializable
+internal data class Session(
+    @SerialName("anilistToken") val anilistToken: String? = null,
+    @SerialName("sessionActive") val isSessionActive: Boolean = false
+)

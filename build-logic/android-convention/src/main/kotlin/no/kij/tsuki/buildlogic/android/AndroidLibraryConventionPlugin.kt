@@ -24,6 +24,7 @@ import no.kij.tsuki.buildlogic.commonTasks
 import no.kij.tsuki.buildlogic.desugar
 import no.kij.tsuki.buildlogic.implementation
 import no.kij.tsuki.buildlogic.kapt
+import no.kij.tsuki.buildlogic.projectImplementation
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.dependencies
@@ -48,6 +49,7 @@ internal class AndroidLibraryConventionPlugin : ConventionPlugin {
             implementation(catalogBundle("common-android"))
             kapt(catalogBundle("kapt"))
             desugar(catalogLib("desugaring"))
+            projectImplementation(":core:logging")
         }
     }
 }

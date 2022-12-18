@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.domain.session.failure
+package no.kij.tsuki.data.preferences.session.serializer
 
-import no.kij.tsuki.domain.base.failure.Failure
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.KSerializer
+import no.kij.tsuki.data.preferences.base.serializer.PreferenceSerializer
+import no.kij.tsuki.data.preferences.session.model.Session
 
-sealed interface SessionFailure : Failure {
-    object CheckingActiveSession : SessionFailure
-    object SavingSession : SessionFailure
-    object ClearingSession : SessionFailure
-    object DeletingToken : SessionFailure
+@ExperimentalSerializationApi
+internal object SessionSerializer : PreferenceSerializer<Session> {
+    override val defaultValue: Session = Session()
+    override val serializer: KSerializer<Session> = Session.serializer()
 }

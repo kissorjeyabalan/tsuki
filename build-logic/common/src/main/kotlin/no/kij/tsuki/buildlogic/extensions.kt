@@ -28,6 +28,7 @@ import org.gradle.jvm.toolchain.JvmVendorSpec
 import org.gradle.kotlin.dsl.DependencyHandlerScope
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.getByType
+import org.gradle.kotlin.dsl.project
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
 import org.jetbrains.kotlin.gradle.plugin.KaptExtension
@@ -54,6 +55,9 @@ fun DependencyHandlerScope.ksp(provider: Provider<*>) =
 
 fun DependencyHandlerScope.desugar(provider: Provider<*>) =
     addProvider("coreLibraryDesugaring", provider)
+
+fun DependencyHandlerScope.projectImplementation(modulePath: String) =
+    add("implementation", project(modulePath))
 
 fun ExtensionContainer.commonExtensions() {
     configure<JavaPluginExtension> {
