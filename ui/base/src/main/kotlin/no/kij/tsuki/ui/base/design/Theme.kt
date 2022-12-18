@@ -35,18 +35,18 @@ private fun TsukiTheme(
     useDarkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-   // val colorScheme = if (supportsDynamicTheming()) {
-   //     val context = LocalContext.current
-   //     if (useDarkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-   // } else {
+   /** val colorScheme = if (supportsDynamicTheming()) {
+    val context = LocalContext.current
+        if (useDarkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+    } else {
         if (useDarkTheme) DarkColors else LightColors
-   // }
+    }**/
 
     CompositionLocalProvider(
         LocalSpacing provides Spacing()
     ) {
         MaterialTheme(
-            colorScheme = colorScheme,
+            colorScheme = if (useDarkTheme) DarkColors else LightColors,
             typography = AppTypography,
             content = content
         )
