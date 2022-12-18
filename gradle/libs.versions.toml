@@ -49,7 +49,10 @@ compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 
-# Design
+# datastore
+datastore = { module = "androidx.datastore:datastore", version = "1.0.0" }
+
+# design
 design-constraintlayout = { module = "androidx.constraintlayout:constraintlayout-compose", version = "1.0.1" }
 
 # destinations
@@ -72,28 +75,34 @@ hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt"
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 
-# HiltX
+# hiltx
 hiltx-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hiltx" }
 hiltx-navigation = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltx" }
 
-# Kotlin
+# kotlin
 kotlin = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 kotlin-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version = "0.3.5" }
 
-# Lifecycle
+# lifecycle
 lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version = "2.5.1" }
 
-# Orbit
+# orbit
 orbit = { module = "org.orbit-mvi:orbit-viewmodel", version.ref = "orbit" }
 orbit-compose = { module = "org.orbit-mvi:orbit-compose", version.ref = "orbit" }
 
-# Sentry
+# sentry
 sentry = { module = "io.sentry:sentry-android", version.ref = "sentry" }
 sentry-apollo = { module = "io.sentry:sentry-apollo-3", version.ref = "sentry" }
 sentry-compose = { module = "io.sentry:sentry-compose-android", version.ref = "sentry" }
 sentry-timber = { module = "io.sentry:sentry-android-timber", version.ref = "sentry" }
 
-# Timber
+# serialization
+protobuf = { module = "org.jetbrains.kotlinx:kotlinx-serialization-protobuf", version = "1.4.1" }
+
+# crypto
+tink = { module = "com.google.crypto.tink:tink-android", version = "1.7.0" }
+
+# timber
 timber = { module = "com.jakewharton.timber:timber", version = "5.0.1" }
 
 
@@ -157,4 +166,10 @@ ui-compose = [
 
 ksp-ui = [
     "destinations-compiler",
+]
+
+data-preferences = [
+    "datastore",
+    "protobuf",
+    "tink"
 ]
