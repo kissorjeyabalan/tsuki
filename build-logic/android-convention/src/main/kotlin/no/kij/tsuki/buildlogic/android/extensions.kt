@@ -63,6 +63,7 @@ internal fun BaseExtension.baseAndroidConfig() {
     compileOptions {
         sourceCompatibility = TsukiConfiguration.javaVersion
         targetCompatibility = TsukiConfiguration.javaVersion
+        isCoreLibraryDesugaringEnabled = true
     }
 }
 
