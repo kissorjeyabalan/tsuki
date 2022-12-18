@@ -17,7 +17,7 @@
 package no.kij.tsuki.domain.base.logger
 
 interface Logger {
-    fun setup(debugMode: Boolean)
+    fun setup(debugMode: Boolean, dsn: String)
 
     /**
      * Log a verbose message with optional format args.

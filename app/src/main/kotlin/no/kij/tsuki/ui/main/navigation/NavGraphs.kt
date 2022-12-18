@@ -23,7 +23,7 @@ import no.kij.tsuki.ui.login.navigation.LoginNavGraph
 internal object NavGraphs {
     internal val home = object : NavGraphSpec {
         override val route = "home"
-        override val startRoute = TODO("Swap to home")
+        override val startRoute = LoginNavGraph// TODO("Swap to home")
         override val destinationsByRoute = emptyMap<String, DestinationSpec<*>>()
         override val nestedNavGraphs = emptyList<NavGraphSpec>()
     }

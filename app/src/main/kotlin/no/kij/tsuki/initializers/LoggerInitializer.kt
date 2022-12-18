@@ -28,7 +28,7 @@ internal class LoggerInitializer : Initializer<Unit> {
 
     override fun create(context: Context) {
         InitializerEntryPoint.resolve(context).inject(this)
-        logger.setup(BuildConfig.DEBUG)
+        logger.setup(BuildConfig.DEBUG, BuildConfig.SENTRY_DSN)
     }
 
     override fun dependencies() = listOf<Class<out Initializer<*>>>(

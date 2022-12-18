@@ -28,6 +28,7 @@ import no.kij.tsuki.buildlogic.implementation
 import no.kij.tsuki.buildlogic.kapt
 import no.kij.tsuki.buildlogic.projectImplementation
 import org.gradle.api.Project
+import org.gradle.internal.impldep.org.codehaus.plexus.util.FileUtils.extension
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
@@ -100,6 +101,8 @@ internal class AndroidApplicationConventionPlugin : ConventionPlugin {
                 applicationIdSuffix = ".dev"
                 versionNameSuffix = "-dev"
                 configure(isDebug = true)
+
+                buildConfigField("String", "SENTRY_DSN", "\"\"")
             }
 
             release {
@@ -109,6 +112,11 @@ internal class AndroidApplicationConventionPlugin : ConventionPlugin {
                     "proguard-rules.pro",
                 )
                 signingConfig = signingConfigs.getByName("release")
+                buildConfigField(
+                    "String",
+                    "SENTRY_DSN",
+                    "\"https://3e9fd13380ff42fca100bcca6dc17376@o987733.ingest.sentry.io/4504333355646976\""
+                )
             }
 
             create("beta") {
@@ -117,6 +125,11 @@ internal class AndroidApplicationConventionPlugin : ConventionPlugin {
 
                 applicationIdSuffix = ".beta"
                 versionNameSuffix = "-beta"
+                buildConfigField(
+                    "String",
+                    "SENTRY_DSN",
+                    "\"https://c951872649bb4af682d5e002b6da766b@o987733.ingest.sentry.io/4504333316325376\""
+                )
             }
         }
 
@@ -139,6 +152,5 @@ internal class AndroidApplicationConventionPlugin : ConventionPlugin {
         isShrinkResources = !isDebug
     }
 
-    private fun Properties.getValue(key: String, env: String) =
-        getOrElse(key) { System.getenv(env) } as? String
+    private fun Properties.getValue(key: String, env: String) = getOrElse(key) { System.getenv(env) } as? String
 }
