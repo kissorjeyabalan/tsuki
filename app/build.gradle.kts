@@ -36,6 +36,12 @@ dependencies {
 
     implementation(projects.core.logging)
 
+    implementation(projects.data.preferences.base)
+    implementation(projects.data.preferences.session)
+
+    implementation(projects.data.remote.base)
+    implementation(projects.data.remote.user)
+
     implementation(projects.domain.base)
     implementation(projects.domain.session)
     implementation(projects.domain.user)

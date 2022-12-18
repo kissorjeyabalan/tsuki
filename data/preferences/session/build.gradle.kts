@@ -1,3 +1,4 @@
+@file:Suppress("DSL_SCOPE_VIOLATION")
 /*
  * Copyright (C) 2022 Kissor Jeyabalan
  *
@@ -14,13 +15,18 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.domain.session.failure
+import no.kij.tsuki.buildlogic.TsukiConfiguration
 
-import no.kij.tsuki.domain.base.failure.Failure
+plugins {
+    id("tsuki.android.library")
+    alias(libs.plugins.serialization)
+}
 
-sealed interface SessionFailure : Failure {
-    object CheckingActiveSession : SessionFailure
-    object SavingSession : SessionFailure
-    object ClearingSession : SessionFailure
-    object DeletingToken : SessionFailure
+android.namespace = "${TsukiConfiguration.packageName}.data.preferences.session"
+
+dependencies {
+    implementation(projects.common.core)
+    implementation(projects.domain.session)
+    implementation(projects.data.preferences.base)
+    implementation(libs.bundles.data.preferences)
 }

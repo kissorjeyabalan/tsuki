@@ -1,3 +1,4 @@
+@file:Suppress("DSL_SCOPE_VIOLATION")
 /*
  * Copyright (C) 2022 Kissor Jeyabalan
  *
@@ -14,13 +15,26 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.domain.session.failure
+import no.kij.tsuki.buildlogic.TsukiConfiguration
 
-import no.kij.tsuki.domain.base.failure.Failure
+plugins {
+    id("tsuki.android.library")
+    alias(libs.plugins.apollo)
+}
 
-sealed interface SessionFailure : Failure {
-    object CheckingActiveSession : SessionFailure
-    object SavingSession : SessionFailure
-    object ClearingSession : SessionFailure
-    object DeletingToken : SessionFailure
+val pkg = "${TsukiConfiguration.packageName}.data.remote.user"
+
+android.namespace = pkg
+
+apollo {
+    generateAsInternal.set(true)
+    packageName.set(pkg)
+}
+
+dependencies {
+    apolloMetadata(projects.data.remote.base)
+    implementation(projects.common.core)
+    implementation(projects.data.remote.base)
+    implementation(projects.domain.user)
+    implementation(libs.bundles.data.remote)
 }

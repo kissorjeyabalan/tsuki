@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.domain.session.failure
+package no.kij.tsuki.data.remote.base.di
 
-import no.kij.tsuki.domain.base.failure.Failure
+import javax.inject.Qualifier
 
-sealed interface SessionFailure : Failure {
-    object CheckingActiveSession : SessionFailure
-    object SavingSession : SessionFailure
-    object ClearingSession : SessionFailure
-    object DeletingToken : SessionFailure
-}
+@Qualifier
+internal annotation class AnilistTokenInterceptor
+
+@Qualifier
+internal annotation class SessionInterceptor

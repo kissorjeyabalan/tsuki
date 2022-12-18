@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.domain.session.failure
+package no.kij.tsuki.data.remote.user
 
+import arrow.core.Either
 import no.kij.tsuki.domain.base.failure.Failure
+import no.kij.tsuki.domain.user.model.UserId
 
-sealed interface SessionFailure : Failure {
-    object CheckingActiveSession : SessionFailure
-    object SavingSession : SessionFailure
-    object ClearingSession : SessionFailure
-    object DeletingToken : SessionFailure
+internal interface UserRemoteSource {
+    suspend fun getUserId(): Either<Failure, UserId>
+    suspend fun saveUserId(): Either<Failure, Unit>
 }

@@ -14,13 +14,17 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.domain.session.failure
+package no.kij.tsuki.data.remote.user.repository
 
-import no.kij.tsuki.domain.base.failure.Failure
+import no.kij.tsuki.data.remote.user.UserRemoteSource
+import no.kij.tsuki.domain.user.repository.UserRepository
+import javax.inject.Inject
 
-sealed interface SessionFailure : Failure {
-    object CheckingActiveSession : SessionFailure
-    object SavingSession : SessionFailure
-    object ClearingSession : SessionFailure
-    object DeletingToken : SessionFailure
+internal class UserRepositoryImpl @Inject constructor(
+    private val source: UserRemoteSource
+) : UserRepository {
+    override suspend fun getUserId() = source.getUserId()
+
+    override suspend fun saveUserId() = source.saveUserId()
+
 }

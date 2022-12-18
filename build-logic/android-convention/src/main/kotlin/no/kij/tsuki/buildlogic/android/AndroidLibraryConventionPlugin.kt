@@ -24,6 +24,7 @@ import no.kij.tsuki.buildlogic.commonTasks
 import no.kij.tsuki.buildlogic.desugar
 import no.kij.tsuki.buildlogic.implementation
 import no.kij.tsuki.buildlogic.kapt
+import no.kij.tsuki.buildlogic.projectImplementation
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.dependencies
@@ -33,9 +34,9 @@ internal class AndroidLibraryConventionPlugin : ConventionPlugin {
     override fun Project.configure() {
         apply(plugin = "com.android.library")
         apply(plugin = "org.jetbrains.kotlin.android")
-        apply(plugin = "org.jetbrains.kotlin.kapt")
         apply(plugin = "com.google.dagger.hilt.android")
         apply(plugin = "tsuki.sonarqube.android")
+        apply(plugin = "org.jetbrains.kotlin.kapt")
 
         with(extensions) {
             commonAndroidExtensions()
@@ -48,6 +49,9 @@ internal class AndroidLibraryConventionPlugin : ConventionPlugin {
             implementation(catalogBundle("common-android"))
             kapt(catalogBundle("kapt"))
             desugar(catalogLib("desugaring"))
+
+            if (project.path != ":core:logging")
+                projectImplementation(":core:logging")
         }
     }
 }

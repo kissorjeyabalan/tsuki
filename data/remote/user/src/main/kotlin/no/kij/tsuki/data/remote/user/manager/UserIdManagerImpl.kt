@@ -14,13 +14,17 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.domain.session.failure
+package no.kij.tsuki.data.remote.user.manager
 
-import no.kij.tsuki.domain.base.failure.Failure
+import no.kij.tsuki.domain.base.usecase.invoke
+import no.kij.tsuki.domain.user.manager.UserIdManager
+import no.kij.tsuki.domain.user.usecase.GetUserIdUseCase
+import javax.inject.Inject
+import javax.inject.Singleton
 
-sealed interface SessionFailure : Failure {
-    object CheckingActiveSession : SessionFailure
-    object SavingSession : SessionFailure
-    object ClearingSession : SessionFailure
-    object DeletingToken : SessionFailure
+@Singleton
+internal class UserIdManagerImpl @Inject constructor(
+    private val getUserId: GetUserIdUseCase
+) : UserIdManager {
+    override suspend fun getId() = getUserId().map { it.id }
 }

@@ -13,14 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import no.kij.tsuki.buildlogic.TsukiConfiguration
 
-package no.kij.tsuki.domain.session.failure
+plugins {
+    id("tsuki.android.library")
+}
 
-import no.kij.tsuki.domain.base.failure.Failure
+android.namespace = "${TsukiConfiguration.packageName}.data.preferences.base"
 
-sealed interface SessionFailure : Failure {
-    object CheckingActiveSession : SessionFailure
-    object SavingSession : SessionFailure
-    object ClearingSession : SessionFailure
-    object DeletingToken : SessionFailure
+dependencies {
+    implementation(projects.common.core)
+    implementation(projects.domain.base)
+    implementation(libs.bundles.data.preferences)
 }

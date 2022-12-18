@@ -14,13 +14,16 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.domain.session.failure
+package no.kij.tsuki.data.preferences.base
 
 import no.kij.tsuki.domain.base.failure.Failure
+import java.io.IOException
 
-sealed interface SessionFailure : Failure {
-    object CheckingActiveSession : SessionFailure
-    object SavingSession : SessionFailure
-    object ClearingSession : SessionFailure
-    object DeletingToken : SessionFailure
+fun Throwable.handle(
+    ioException: () -> Failure,
+    other: () -> Failure
+) = if (this is IOException) {
+    ioException()
+} else {
+    other()
 }

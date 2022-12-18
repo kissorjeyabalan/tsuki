@@ -14,13 +14,10 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.domain.session.failure
+package no.kij.tsuki.data.remote.user.mapper.response
 
-import no.kij.tsuki.domain.base.failure.Failure
+import no.kij.tsuki.data.remote.user.UserIdQuery
+import no.kij.tsuki.domain.user.model.UserId
 
-sealed interface SessionFailure : Failure {
-    object CheckingActiveSession : SessionFailure
-    object SavingSession : SessionFailure
-    object ClearingSession : SessionFailure
-    object DeletingToken : SessionFailure
-}
+internal operator fun UserIdQuery.Data?.invoke(): UserId =
+    UserId(id = checkNotNull(this?.viewer?.id) { "ViewerId is required." })

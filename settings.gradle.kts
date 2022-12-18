@@ -49,7 +49,7 @@ gradleEnterprise {
 
 include(":app")
 
-listOf<String>("common", "core", "domain", "ui").forEach { dir ->
+listOf<String>("common", "core", "data/preferences", "data/remote", "domain", "ui").forEach { dir ->
     rootDir.resolve(dir).walkTopDown().maxDepth(1).filter { file ->
         file.isDirectory && file.resolve("build.gradle.kts").exists()
     }.forEach { module ->

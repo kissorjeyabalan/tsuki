@@ -14,13 +14,9 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.domain.session.failure
+package no.kij.tsuki.data.remote.base
 
-import no.kij.tsuki.domain.base.failure.Failure
+import arrow.core.Either
+import com.apollographql.apollo3.api.Optional
 
-sealed interface SessionFailure : Failure {
-    object CheckingActiveSession : SessionFailure
-    object SavingSession : SessionFailure
-    object ClearingSession : SessionFailure
-    object DeletingToken : SessionFailure
-}
+fun <A, B> Either<A, B>.optional() = Optional.presentIfNotNull(orNull())
