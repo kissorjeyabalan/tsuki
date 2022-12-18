@@ -32,13 +32,15 @@ android {
 }
 
 apollo {
-    alwaysGenerateTypesMatching.set(listOf("Query", "User"))
-    generateApolloMetadata.set(true)
-    packageName.set(pkg)
+    service("service") {
+        alwaysGenerateTypesMatching.set(listOf("Query", "User"))
+        generateApolloMetadata.set(true)
+        packageName.set(pkg)
 
-    introspection {
-        endpointUrl.set("https://graphql.anilist.co")
-        schemaFile.set(file("src/main/graphql/schema.graphqls"))
+        introspection {
+            endpointUrl.set("https://graphql.anilist.co")
+            schemaFile.set(file("src/main/graphql/schema.graphqls"))
+        }
     }
 }
 
