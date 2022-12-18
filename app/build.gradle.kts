@@ -40,6 +40,7 @@ dependencies {
     implementation(projects.data.preferences.session)
 
     implementation(projects.data.remote.base)
+    implementation(projects.data.remote.user)
 
     implementation(projects.domain.base)
     implementation(projects.domain.session)
