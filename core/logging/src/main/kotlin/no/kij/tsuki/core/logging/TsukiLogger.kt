@@ -30,8 +30,9 @@ import javax.inject.Inject
 internal class TsukiLogger @Inject constructor(
     @ApplicationContext private val context: Context
 ) : Logger {
-    override fun setup(debugMode: Boolean) {
+    override fun setup(debugMode: Boolean, dsn: String) {
         SentryAndroid.init(context) { options ->
+            options.dsn = dsn
             if (!debugMode) {
                 options.addIntegration(
                     SentryTimberIntegration(
