@@ -49,7 +49,9 @@ internal class AndroidLibraryConventionPlugin : ConventionPlugin {
             implementation(catalogBundle("common-android"))
             kapt(catalogBundle("kapt"))
             desugar(catalogLib("desugaring"))
-            projectImplementation(":core:logging")
+
+            if (project.path != ":core:logging")
+                projectImplementation(":core:logging")
         }
     }
 }
