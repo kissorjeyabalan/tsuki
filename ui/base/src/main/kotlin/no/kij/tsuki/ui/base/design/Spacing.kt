@@ -30,6 +30,10 @@ private val ExtraMediumSpace = 24.dp
 private val LargeSpace = 32.dp
 private val ExtraLargeSpace = 40.dp
 private val LargestSpace = 64.dp
+private val BannerHeight = 128.dp
+
+private val MediaCardWidth = 140.dp
+private val MediaCardHeight = 200.dp
 
 @Immutable
 data class Spacing(
@@ -41,7 +45,11 @@ data class Spacing(
     val extraMediumSpace: Dp = ExtraMediumSpace,
     val largeSpace: Dp = LargeSpace,
     val extraLargeSpace: Dp = ExtraLargeSpace,
-    val largestSpace: Dp = LargestSpace
+    val largestSpace: Dp = LargestSpace,
+    val bannerHeight: Dp = BannerHeight,
+
+    val mediaCardWidth: Dp = MediaCardWidth,
+    val mediaCardHeight: Dp = MediaCardHeight
 )
 
 internal val LocalSpacing = staticCompositionLocalOf { Spacing() }

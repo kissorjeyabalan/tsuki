@@ -30,6 +30,6 @@ ksp {
 dependencies {
     implementation(projects.common.core)
     implementation(projects.ui.base)
-    implementation(projects.domain.session)
+    implementation(projects.domain.auth)
     implementation(projects.domain.user)
 }

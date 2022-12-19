@@ -37,17 +37,22 @@ dependencies {
     implementation(projects.core.logging)
 
     implementation(projects.data.preferences.base)
-    implementation(projects.data.preferences.session)
+    implementation(projects.data.preferences.auth)
 
     implementation(projects.data.remote.base)
+    implementation(projects.data.remote.explore)
     implementation(projects.data.remote.user)
 
     implementation(projects.domain.base)
-    implementation(projects.domain.session)
+    implementation(projects.domain.auth)
+    implementation(projects.domain.explore)
     implementation(projects.domain.user)
 
     implementation(projects.ui.base)
+    implementation(projects.ui.explore)
     implementation(projects.ui.login)
 
     implementation(libs.sentry)
+
+    implementation(libs.timber)
 }

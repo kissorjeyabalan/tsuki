@@ -17,16 +17,14 @@
 package no.kij.tsuki.ui.login.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import no.kij.tsuki.domain.base.usecase.invoke
-import no.kij.tsuki.domain.session.model.AnilistToken
-import no.kij.tsuki.domain.session.usecase.SaveSessionUseCase
+import no.kij.tsuki.domain.auth.model.AnilistToken
+import no.kij.tsuki.domain.auth.usecase.SaveTokenUseCase
 import no.kij.tsuki.domain.user.usecase.SaveUserIdUseCase
 import no.kij.tsuki.ui.base.viewmodel.BaseViewModel
 import no.kij.tsuki.ui.login.LOGIN_DEEP_LINK_TOKEN
 import no.kij.tsuki.ui.login.R
-import org.orbitmvi.orbit.Container
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
@@ -35,7 +33,7 @@ import javax.inject.Inject
 @HiltViewModel
 internal class LoginViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val saveSessionUseCase: SaveSessionUseCase,
+    private val saveTokenUseCase: SaveTokenUseCase,
     private val saveUserIdUseCase: SaveUserIdUseCase
 ) : BaseViewModel<LoginState, Nothing>() {
     override val container = container<LoginState, Nothing>(LoginState()) {
@@ -54,7 +52,7 @@ internal class LoginViewModel @Inject constructor(
     }
 
     private suspend fun saveToken(token: String) {
-        saveSessionUseCase(AnilistToken(token)).fold(
+        saveTokenUseCase(AnilistToken(token)).fold(
             ifLeft = {
                 updateState { copy(loading = false, error = R.string.save_token_error) }
             },

@@ -30,11 +30,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemColors
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
-import androidx.compose.material3.NavigationRailItemColors
 import androidx.compose.material3.NavigationRailItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -43,14 +45,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.referentialEqualityPolicy
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.compositeOver
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
-import androidx.navigation.NavDestination
-import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavGraph
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.ramcosta.composedestinations.navigation.navigate
-import com.ramcosta.composedestinations.spec.NavGraphSpec
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import no.kij.tsuki.ui.login.navigation.LoginNavGraph
@@ -121,14 +121,21 @@ private fun BottomNavigationBar(
     isItemSelected: (NavigationBarItem) -> Boolean,
     onClick: (NavigationBarItem) -> Unit
 ) {
-    NavigationBar {
+    NavigationBar(
+        containerColor = MaterialTheme.colorScheme.surface,
+    ) {
         destinations.forEach { destination ->
             NavigationBarItem(
                 selected = isItemSelected(destination),
                 onClick = { onClick(destination) },
                 icon = { NavigationBarIcon(destination) },
                 label = { NavigationBarLabel(destination) },
-                alwaysShowLabel = false
+                alwaysShowLabel = false,
+                colors = NavigationBarItemDefaults.colors(
+                    indicatorColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f).compositeOver
+                        (MaterialTheme.colorScheme.inversePrimary.copy())
+
+                )
             )
         }
     }
@@ -172,44 +179,4 @@ private fun NavigationBarIcon(destination: NavigationBarItem) {
 @Composable
 private fun NavigationBarLabel(destination: NavigationBarItem) {
     Text(text = stringResource(destination.label))
-}
-
-private fun NavController.navigate(destination: NavigationBarItem) {
-    navigate(destination.direction) {
-        launchSingleTop = true
-        restoreState = true
-
-        findStartDestination(graph)?.id?.let { id ->
-            popUpTo(id) {
-                saveState = true
-            }
-        }
-    }
-}
-
-private fun NavDestination.navGraph(): NavGraphSpec {
-    hierarchy.forEach { destination ->
-        NavGraphs.root.nestedNavGraphs.forEach { navGraph ->
-            if (destination.route == navGraph.route) {
-                return navGraph
-            }
-        }
-    }
-
-    error("Unknown nav graph for destination $route")
-}
-
-private tailrec fun findStartDestination(graph: NavDestination?): NavDestination? =
-    if (graph is NavGraph) {
-        findStartDestination(graph.startDestination)
-    } else {
-        graph
-    }
-
-private val NavGraph.startDestination: NavDestination?
-    get() = findNode(startDestinationId)
-
-internal enum class NavigationBarType {
-    Bottom,
-    Rail,
 }

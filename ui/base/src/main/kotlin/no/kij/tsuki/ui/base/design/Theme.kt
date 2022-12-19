@@ -46,7 +46,8 @@ private fun TsukiTheme(
         LocalSpacing provides Spacing()
     ) {
         MaterialTheme(
-            colorScheme = if (useDarkTheme) DarkColors else LightColors,
+            //colorScheme = if (useDarkTheme) DarkColors else LightColors,
+            colorScheme = LightColors,
             typography = AppTypography,
             content = content
         )

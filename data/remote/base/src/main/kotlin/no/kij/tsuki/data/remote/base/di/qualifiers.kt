@@ -22,4 +22,4 @@ import javax.inject.Qualifier
 internal annotation class AnilistTokenInterceptor
 
 @Qualifier
-internal annotation class SessionInterceptor
+internal annotation class AuthInterceptor

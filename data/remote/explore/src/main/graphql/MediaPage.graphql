@@ -1,0 +1,32 @@
+query MediaPageQuery(
+    $type: MediaType,
+    $page: Int,
+    $perPage: Int,
+    $sort: [MediaSort],
+    $season: MediaSeason,
+    $seasonYear: Int
+) {
+    page: Page(
+        page: $page,
+        perPage: $perPage
+    ) @nonnull {
+        media(
+            type: $type,
+            sort: $sort,
+            season: $season,
+            seasonYear: $seasonYear
+        ) @nonnull {
+            id
+            type
+            format
+            title {
+                userPreferred
+                romaji
+            }
+            coverImage {
+                extraLarge
+                large
+            }
+        }
+    }
+}

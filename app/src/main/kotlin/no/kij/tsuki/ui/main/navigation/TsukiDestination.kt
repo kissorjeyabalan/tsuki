@@ -17,6 +17,7 @@
 package no.kij.tsuki.ui.main.navigation
 
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
@@ -28,6 +29,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.windowInsetsBottomHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -49,7 +51,7 @@ import com.ramcosta.composedestinations.navigation.popUpTo
 import com.ramcosta.composedestinations.scope.DestinationScope
 import io.sentry.compose.withSentryObservableEffect
 import no.kij.tsuki.ui.login.view.destinations.LoginDestination
-import no.kij.tsuki.ui.main.component.SessionExpiredDialog
+import no.kij.tsuki.ui.main.component.AuthExpiredDialog
 import no.kij.tsuki.ui.main.viewmodel.MainViewModel
 import org.orbitmvi.orbit.compose.collectAsState
 
@@ -70,8 +72,8 @@ internal fun TsukiDestination(
 
     val state by vm.collectAsState()
 
-    SessionExpiredDialog(visible = !state.isSessionActive) {
-        vm.clearSession()
+    AuthExpiredDialog(visible = !state.isAuthenticated) {
+        vm.clearAuthentication()
         navController.logout()
     }
 
