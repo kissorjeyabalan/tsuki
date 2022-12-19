@@ -25,7 +25,7 @@ import androidx.compose.ui.window.DialogProperties
 import no.kij.tsuki.R
 
 @Composable
-internal fun SessionExpiredDialog(
+internal fun AuthExpiredDialog(
     visible: Boolean,
     onAccept: () -> Unit
 ) {
@@ -34,11 +34,11 @@ internal fun SessionExpiredDialog(
             onDismissRequest = { },
             confirmButton = {
                 TextButton(onClick = onAccept) {
-                    Text(text = stringResource(id = R.string.session_expired_error_confirm))
+                    Text(text = stringResource(id = R.string.auth_expired_error_confirm))
                 }
             },
-            title = { Text(text = stringResource(id = R.string.session_expired_error_title))},
-            text = { Text(text = stringResource(id = R.string.session_expired_error_description)) },
+            title = { Text(text = stringResource(id = R.string.auth_expired_error_title))},
+            text = { Text(text = stringResource(id = R.string.auth_expired_error_description)) },
             properties = DialogProperties(
                 dismissOnBackPress = false,
                 dismissOnClickOutside = false

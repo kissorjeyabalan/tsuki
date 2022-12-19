@@ -14,12 +14,19 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.data.remote.base.di
+package no.kij.tsuki.domain.auth.repository
 
-import javax.inject.Qualifier
+import arrow.core.Either
+import arrow.core.Option
+import kotlinx.coroutines.flow.Flow
+import no.kij.tsuki.domain.base.failure.Failure
+import no.kij.tsuki.domain.auth.model.AnilistToken
 
-@Qualifier
-internal annotation class AnilistTokenInterceptor
+interface AuthRepository {
+    val isAuthenticated: Flow<Either<Failure, Boolean>>
 
-@Qualifier
-internal annotation class AuthInterceptor
+    suspend fun saveToken(anilistToken: AnilistToken): Either<Failure, Unit>
+    suspend fun getAnilistToken(): Option<AnilistToken>
+    suspend fun clearAuthentication(): Either<Failure, Unit>
+    suspend fun deleteAnilistToken(): Either<Failure, Unit>
+}

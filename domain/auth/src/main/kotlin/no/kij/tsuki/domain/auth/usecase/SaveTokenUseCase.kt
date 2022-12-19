@@ -14,12 +14,15 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.data.remote.base.di
+package no.kij.tsuki.domain.auth.usecase
 
-import javax.inject.Qualifier
+import no.kij.tsuki.domain.base.usecase.EitherUseCase
+import no.kij.tsuki.domain.auth.model.AnilistToken
+import no.kij.tsuki.domain.auth.repository.AuthRepository
+import javax.inject.Inject
 
-@Qualifier
-internal annotation class AnilistTokenInterceptor
-
-@Qualifier
-internal annotation class AuthInterceptor
+class SaveTokenUseCase @Inject constructor(
+    private val repository: AuthRepository,
+) : EitherUseCase<AnilistToken, Unit> {
+    override suspend fun invoke(token: AnilistToken) = repository.saveToken(token)
+}

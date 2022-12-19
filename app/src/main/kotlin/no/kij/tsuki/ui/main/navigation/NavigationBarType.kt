@@ -14,12 +14,9 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.data.remote.base.di
+package no.kij.tsuki.ui.main.navigation
 
-import javax.inject.Qualifier
-
-@Qualifier
-internal annotation class AnilistTokenInterceptor
-
-@Qualifier
-internal annotation class AuthInterceptor
+internal enum class NavigationBarType {
+    Bottom,
+    Rail,
+}

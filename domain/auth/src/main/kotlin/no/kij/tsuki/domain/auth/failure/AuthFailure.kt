@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.data.remote.base.di
+package no.kij.tsuki.domain.auth.failure
 
-import javax.inject.Qualifier
+import no.kij.tsuki.domain.base.failure.Failure
 
-@Qualifier
-internal annotation class AnilistTokenInterceptor
-
-@Qualifier
-internal annotation class AuthInterceptor
+sealed interface AuthFailure : Failure {
+    object CheckingAuthentication : AuthFailure
+    object SavingToken : AuthFailure
+    object ClearingAuthentication : AuthFailure
+    object DeletingToken : AuthFailure
+}

@@ -46,7 +46,7 @@ apollo {
 
 dependencies {
     implementation(projects.common.core)
-    implementation(projects.domain.session)
+    implementation(projects.domain.auth)
     implementation(libs.bundles.data.remote)
     implementation(libs.apollo.cache.sql)
     implementation(libs.okhttp)

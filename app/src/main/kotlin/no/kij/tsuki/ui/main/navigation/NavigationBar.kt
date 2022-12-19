@@ -34,7 +34,6 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
-import androidx.compose.material3.NavigationRailItemColors
 import androidx.compose.material3.NavigationRailItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -45,12 +44,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
-import androidx.navigation.NavDestination
-import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavGraph
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.ramcosta.composedestinations.navigation.navigate
-import com.ramcosta.composedestinations.spec.NavGraphSpec
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import no.kij.tsuki.ui.login.navigation.LoginNavGraph
@@ -172,44 +166,4 @@ private fun NavigationBarIcon(destination: NavigationBarItem) {
 @Composable
 private fun NavigationBarLabel(destination: NavigationBarItem) {
     Text(text = stringResource(destination.label))
-}
-
-private fun NavController.navigate(destination: NavigationBarItem) {
-    navigate(destination.direction) {
-        launchSingleTop = true
-        restoreState = true
-
-        findStartDestination(graph)?.id?.let { id ->
-            popUpTo(id) {
-                saveState = true
-            }
-        }
-    }
-}
-
-private fun NavDestination.navGraph(): NavGraphSpec {
-    hierarchy.forEach { destination ->
-        NavGraphs.root.nestedNavGraphs.forEach { navGraph ->
-            if (destination.route == navGraph.route) {
-                return navGraph
-            }
-        }
-    }
-
-    error("Unknown nav graph for destination $route")
-}
-
-private tailrec fun findStartDestination(graph: NavDestination?): NavDestination? =
-    if (graph is NavGraph) {
-        findStartDestination(graph.startDestination)
-    } else {
-        graph
-    }
-
-private val NavGraph.startDestination: NavDestination?
-    get() = findNode(startDestinationId)
-
-internal enum class NavigationBarType {
-    Bottom,
-    Rail,
 }

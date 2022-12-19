@@ -14,12 +14,15 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.data.remote.base.di
+package no.kij.tsuki.data.preferences.auth.serializer
 
-import javax.inject.Qualifier
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.KSerializer
+import no.kij.tsuki.data.preferences.base.serializer.PreferenceSerializer
+import no.kij.tsuki.data.preferences.auth.model.Authentication
 
-@Qualifier
-internal annotation class AnilistTokenInterceptor
-
-@Qualifier
-internal annotation class AuthInterceptor
+@ExperimentalSerializationApi
+internal object AuthSerializer : PreferenceSerializer<Authentication> {
+    override val defaultValue: Authentication = Authentication()
+    override val serializer: KSerializer<Authentication> = Authentication.serializer()
+}

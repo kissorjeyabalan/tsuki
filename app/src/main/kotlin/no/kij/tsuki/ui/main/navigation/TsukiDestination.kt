@@ -44,12 +44,11 @@ import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.animations.defaults.RootNavGraphDefaultAnimations
 import com.ramcosta.composedestinations.animations.rememberAnimatedNavHostEngine
 import com.ramcosta.composedestinations.navigation.dependency
-import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.navigation.popUpTo
 import com.ramcosta.composedestinations.scope.DestinationScope
 import io.sentry.compose.withSentryObservableEffect
 import no.kij.tsuki.ui.login.view.destinations.LoginDestination
-import no.kij.tsuki.ui.main.component.SessionExpiredDialog
+import no.kij.tsuki.ui.main.component.AuthExpiredDialog
 import no.kij.tsuki.ui.main.viewmodel.MainViewModel
 import org.orbitmvi.orbit.compose.collectAsState
 
@@ -70,8 +69,8 @@ internal fun TsukiDestination(
 
     val state by vm.collectAsState()
 
-    SessionExpiredDialog(visible = !state.isSessionActive) {
-        vm.clearSession()
+    AuthExpiredDialog(visible = !state.isAuthenticated) {
+        vm.clearAuthentication()
         navController.logout()
     }
 

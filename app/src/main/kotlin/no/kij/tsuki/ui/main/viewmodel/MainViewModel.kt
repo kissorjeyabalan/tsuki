@@ -17,13 +17,11 @@
 package no.kij.tsuki.ui.main.viewmodel
 
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
 import no.kij.tsuki.domain.base.usecase.invoke
 import no.kij.tsuki.domain.base.usecase.sync
-import no.kij.tsuki.domain.session.usecase.ClearActiveSessionUseCase
-import no.kij.tsuki.domain.session.usecase.GetAnilistTokenUseCase
-import no.kij.tsuki.domain.session.usecase.ObserveActiveSessionUseCase
+import no.kij.tsuki.domain.auth.usecase.ClearAuthenticationUseCase
+import no.kij.tsuki.domain.auth.usecase.GetAnilistTokenUseCase
+import no.kij.tsuki.domain.auth.usecase.ObserveAuthenticationUseCase
 import no.kij.tsuki.ui.base.viewmodel.BaseViewModel
 import no.kij.tsuki.ui.login.navigation.LoginNavGraph
 import org.orbitmvi.orbit.syntax.simple.intent
@@ -33,14 +31,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class MainViewModel @Inject constructor(
-    private val clearActiveSessionUseCase: ClearActiveSessionUseCase,
+    private val clearAuthenticationUseCase: ClearAuthenticationUseCase,
     private val getAnilistTokenUseCase: GetAnilistTokenUseCase,
-    private val observeActiveSessionUseCase: ObserveActiveSessionUseCase
+    private val observeAuthenticationUseCase: ObserveAuthenticationUseCase
 ) : BaseViewModel<MainState, Nothing>() {
     override val container = container<MainState, Nothing>(
         MainState(initialNavGraph = initialNavGraph)
     ) {
-        observeSession()
+        observeAuthentication()
     }
 
     private val initialNavGraph
@@ -50,23 +48,23 @@ internal class MainViewModel @Inject constructor(
             LoginNavGraph
         }
 
-    fun clearSession() {
+    fun clearAuthentication() {
         intent {
-            clearActiveSessionUseCase()
+            clearAuthenticationUseCase()
         }
     }
 
-    private fun observeSession() {
-        observeActiveSessionUseCase()
+    private fun observeAuthentication() {
+        observeAuthenticationUseCase()
 
         intent {
-            observeActiveSessionUseCase.flow.collect { active ->
+            observeAuthenticationUseCase.flow.collect { active ->
                 active.fold(
                     ifLeft = {
-                        reduce { state.copy(isSessionActive = false) }
+                        reduce { state.copy(isAuthenticated = false) }
                     },
                     ifRight = {
-                        reduce { state.copy(isSessionActive = it) }
+                        reduce { state.copy(isAuthenticated = it) }
                     }
                 )
             }

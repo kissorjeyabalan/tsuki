@@ -1,3 +1,4 @@
+@file:Suppress("DSL_SCOPE_VIOLATION")
 /*
  * Copyright (C) 2022 Kissor Jeyabalan
  *
@@ -14,12 +15,18 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.data.remote.base.di
+import no.kij.tsuki.buildlogic.TsukiConfiguration
 
-import javax.inject.Qualifier
+plugins {
+    id("tsuki.android.library")
+    alias(libs.plugins.serialization)
+}
 
-@Qualifier
-internal annotation class AnilistTokenInterceptor
+android.namespace = "${TsukiConfiguration.packageName}.data.preferences.auth"
 
-@Qualifier
-internal annotation class AuthInterceptor
+dependencies {
+    implementation(projects.common.core)
+    implementation(projects.domain.auth)
+    implementation(projects.data.preferences.base)
+    implementation(libs.bundles.data.preferences)
+}

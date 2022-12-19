@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.data.remote.base.di
+package no.kij.tsuki.domain.auth.usecase
 
-import javax.inject.Qualifier
+import no.kij.tsuki.domain.base.usecase.FlowUseCase
+import no.kij.tsuki.domain.auth.repository.AuthRepository
+import javax.inject.Inject
 
-@Qualifier
-internal annotation class AnilistTokenInterceptor
-
-@Qualifier
-internal annotation class AuthInterceptor
+class ObserveAuthenticationUseCase @Inject constructor(
+    private val repository: AuthRepository,
+) : FlowUseCase<Unit, Boolean>() {
+    override fun createFlow(params: Unit) = repository.isAuthenticated
+}

@@ -14,12 +14,11 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.data.remote.base.di
+package no.kij.tsuki.domain.auth.model
 
-import javax.inject.Qualifier
-
-@Qualifier
-internal annotation class AnilistTokenInterceptor
-
-@Qualifier
-internal annotation class AuthInterceptor
+@JvmInline
+value class AnilistToken(val token: String) {
+    init {
+        require(token.isNotBlank()) { "Anilist token can not be blank or empty."}
+    }
+}

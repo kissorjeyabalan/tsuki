@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.data.remote.base.di
+package no.kij.tsuki.data.preferences.auth.model
 
-import javax.inject.Qualifier
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@Qualifier
-internal annotation class AnilistTokenInterceptor
-
-@Qualifier
-internal annotation class AuthInterceptor
+@Serializable
+internal data class Authentication(
+    @SerialName("anilistToken") val anilistToken: String? = null,
+    @SerialName("isAuthenticated") val isAuthenticated: Boolean = false
+)

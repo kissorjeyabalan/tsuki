@@ -17,7 +17,6 @@
 package no.kij.tsuki.data.remote.base.di
 
 import android.content.Context
-import arrow.core.None.orNull
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.api.http.HttpRequest
 import com.apollographql.apollo3.api.http.HttpResponse
@@ -39,8 +38,8 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import io.sentry.apollo3.sentryTracing
 import no.kij.tsuki.domain.base.usecase.invoke
-import no.kij.tsuki.domain.session.usecase.DeleteAnilistTokenUseCase
-import no.kij.tsuki.domain.session.usecase.GetAnilistTokenUseCase
+import no.kij.tsuki.domain.auth.usecase.DeleteAnilistTokenUseCase
+import no.kij.tsuki.domain.auth.usecase.GetAnilistTokenUseCase
 import okhttp3.OkHttpClient
 import java.net.HttpURLConnection
 import javax.inject.Singleton
@@ -73,14 +72,14 @@ internal object ApolloModule {
 
     @Provides
     @Singleton
-    @SessionInterceptor
-    fun provideSessionInterceptor(
-        deleteSession: DeleteAnilistTokenUseCase
+    @AuthInterceptor
+    fun provideAuthInterceptor(
+        deleteAnilistTokenUseCase: DeleteAnilistTokenUseCase
     ): HttpInterceptor = object : HttpInterceptor {
         override suspend fun intercept(request: HttpRequest, chain: HttpInterceptorChain): HttpResponse {
             return chain.proceed(request).also { response ->
                 if (response.statusCode == HttpURLConnection.HTTP_BAD_REQUEST || response.statusCode == HttpURLConnection.HTTP_UNAUTHORIZED) {
-                    deleteSession()
+                    deleteAnilistTokenUseCase()
                 }
             }
         }
@@ -92,7 +91,7 @@ internal object ApolloModule {
         client: OkHttpClient,
         cache: NormalizedCacheFactory,
         @AnilistTokenInterceptor anilistTokenInterceptor: HttpInterceptor,
-        @SessionInterceptor sessionInterceptor: HttpInterceptor
+        @AuthInterceptor authInterceptor: HttpInterceptor
     ): ApolloClient {
         val cacheKeyGenerator = object : CacheKeyGenerator {
             override fun cacheKeyForObject(
@@ -111,7 +110,7 @@ internal object ApolloModule {
         return ApolloClient.Builder()
             .serverUrl(ANILIST_BASE_URL)
             .addHttpInterceptor(anilistTokenInterceptor)
-            .addHttpInterceptor(sessionInterceptor)
+            .addHttpInterceptor(authInterceptor)
             .fetchPolicy(FetchPolicy.CacheAndNetwork)
             .okHttpClient(client)
             .sentryTracing()
