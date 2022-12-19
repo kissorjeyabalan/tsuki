@@ -23,7 +23,9 @@ import no.kij.tsuki.domain.auth.usecase.ClearAuthenticationUseCase
 import no.kij.tsuki.domain.auth.usecase.GetAnilistTokenUseCase
 import no.kij.tsuki.domain.auth.usecase.ObserveAuthenticationUseCase
 import no.kij.tsuki.ui.base.viewmodel.BaseViewModel
+import no.kij.tsuki.ui.explore.navigation.ExploreNavGraph
 import no.kij.tsuki.ui.login.navigation.LoginNavGraph
+import no.kij.tsuki.ui.main.navigation.NavGraphs
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
@@ -43,7 +45,7 @@ internal class MainViewModel @Inject constructor(
 
     private val initialNavGraph
         get() = if (getAnilistTokenUseCase.sync().nonEmpty()) {
-            TODO()
+            NavGraphs.home
         } else {
             LoginNavGraph
         }

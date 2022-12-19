@@ -16,18 +16,23 @@
 
 package no.kij.tsuki.ui.main.navigation
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.twotone.Explore
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.ramcosta.composedestinations.spec.NavGraphSpec
 import kotlinx.collections.immutable.persistentListOf
+import no.kij.tsuki.R
+import no.kij.tsuki.ui.explore.navigation.ExploreNavGraph
 
 internal enum class HomeNavigationBarItem(
     override val direction: NavGraphSpec,
     override val icon: ImageVector,
     override val label: Int
 ) : NavigationBarItem {
-    ;
+    Explore(ExploreNavGraph, Icons.TwoTone.Explore, R.string.navbar_destination_explore);
+
     companion object {
         @JvmField
-        val values = persistentListOf<NavigationBarItem>()
+        val values = persistentListOf(Explore)
     }
 }

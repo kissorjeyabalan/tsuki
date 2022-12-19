@@ -16,10 +16,16 @@
 
 package no.kij.tsuki.data.remote.explore.source.anime
 
+import arrow.core.Either
+import kotlinx.coroutines.flow.Flow
 import no.kij.tsuki.data.remote.base.type.MediaSort
 import no.kij.tsuki.data.remote.base.type.MediaType
+import no.kij.tsuki.data.remote.explore.nextSeason
+import no.kij.tsuki.data.remote.explore.season
 import no.kij.tsuki.data.remote.explore.source.ExploreRemoteSource
+import no.kij.tsuki.domain.base.failure.Failure
 import no.kij.tsuki.domain.base.model.entry.MediaEntry
+import java.time.LocalDate
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -27,10 +33,41 @@ import javax.inject.Singleton
 internal class AnimeExploreRemoteSourceImpl @Inject constructor(
     private val delegate: ExploreRemoteSource
 ) : AnimeExploreRemoteSource {
-    override val trendingCollection
-        get() = delegate.getExporeList<MediaEntry.Anime>(
+    override val trendingCollection: Flow<Either<Failure, List<MediaEntry.Anime>>>
+        get() = delegate.getExploreList(
             type = MediaType.ANIME,
             sort = MediaSort.TRENDING_DESC,
+            season = null,
+            seasonYear = null
+        )
+
+    override val popularSeasonCollection: Flow<Either<Failure, List<MediaEntry.Anime>>>
+        get() {
+            val now = LocalDate.now()
+            return delegate.getExploreList(
+                type = MediaType.ANIME,
+                sort = MediaSort.POPULARITY_DESC,
+                season = now.month.season,
+                seasonYear = now.year
+            )
+        }
+
+    override val upcomingCollection: Flow<Either<Failure, List<MediaEntry.Anime>>>
+        get() {
+            val now = LocalDate.now()
+            val nextSeason = now.month.season.nextSeason(now)
+            return delegate.getExploreList(
+                type = MediaType.ANIME,
+                sort = MediaSort.POPULARITY_DESC,
+                season = nextSeason.first,
+                seasonYear = nextSeason.second
+            )
+        }
+
+    override val popularAllTimeCollection: Flow<Either<Failure, List<MediaEntry.Anime>>>
+        get() = delegate.getExploreList(
+            type = MediaType.ANIME,
+            sort = MediaSort.POPULARITY_DESC,
             season = null,
             seasonYear = null
         )

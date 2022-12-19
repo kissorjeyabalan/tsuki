@@ -23,4 +23,7 @@ import no.kij.tsuki.domain.base.model.entry.MediaEntry
 
 internal interface AnimeExploreRemoteSource {
     val trendingCollection: Flow<Either<Failure, List<MediaEntry.Anime>>>
+    val popularSeasonCollection: Flow<Either<Failure, List<MediaEntry.Anime>>>
+    val upcomingCollection: Flow<Either<Failure, List<MediaEntry.Anime>>>
+    val popularAllTimeCollection: Flow<Either<Failure, List<MediaEntry.Anime>>>
 }

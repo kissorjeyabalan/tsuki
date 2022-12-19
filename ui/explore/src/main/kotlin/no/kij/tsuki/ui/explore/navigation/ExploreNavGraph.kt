@@ -14,21 +14,17 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.data.remote.explore.source
+package no.kij.tsuki.ui.explore.navigation
 
-import arrow.core.Either
-import kotlinx.coroutines.flow.Flow
-import no.kij.tsuki.data.remote.base.type.MediaSeason
-import no.kij.tsuki.data.remote.base.type.MediaSort
-import no.kij.tsuki.data.remote.base.type.MediaType
-import no.kij.tsuki.domain.base.failure.Failure
-import no.kij.tsuki.domain.base.model.entry.MediaEntry
+import com.ramcosta.composedestinations.dynamic.routedIn
+import com.ramcosta.composedestinations.spec.NavGraphSpec
+import no.kij.tsuki.ui.explore.view.destinations.ExploreScreenDestination
 
-internal interface ExploreRemoteSource {
-    fun <T : MediaEntry> getExploreList(
-        type: MediaType,
-        sort: MediaSort,
-        season: MediaSeason?,
-        seasonYear: Int?
-    ): Flow<Either<Failure, List<T>>>
+object ExploreNavGraph : NavGraphSpec {
+    override val route = "explore"
+    override val startRoute = ExploreScreenDestination routedIn this
+    override val destinationsByRoute =
+        listOf(ExploreScreenDestination)
+            .routedIn(this)
+            .associateBy { it.route }
 }

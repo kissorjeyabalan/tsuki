@@ -24,6 +24,7 @@ serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref 
 [libraries]
 # Accompanist
 accompanist-placeholder = { module = "com.google.accompanist:accompanist-placeholder-material", version.ref = "accompanist" }
+accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanist" }
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
 
 # AndroidX
@@ -161,6 +162,7 @@ app = [
 
 ui-compose = [
     "accompanist-placeholder",
+    "accompanist-swiperefresh",
     "coil",
     "compose-animation",
     "compose-foundation",

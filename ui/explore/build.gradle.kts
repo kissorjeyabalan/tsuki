@@ -14,21 +14,22 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.data.remote.explore.source
+import no.kij.tsuki.buildlogic.TsukiConfiguration
 
-import arrow.core.Either
-import kotlinx.coroutines.flow.Flow
-import no.kij.tsuki.data.remote.base.type.MediaSeason
-import no.kij.tsuki.data.remote.base.type.MediaSort
-import no.kij.tsuki.data.remote.base.type.MediaType
-import no.kij.tsuki.domain.base.failure.Failure
-import no.kij.tsuki.domain.base.model.entry.MediaEntry
+plugins {
+    id("tsuki.android.compose")
+    id("org.jetbrains.kotlin.plugin.parcelize")
+}
 
-internal interface ExploreRemoteSource {
-    fun <T : MediaEntry> getExploreList(
-        type: MediaType,
-        sort: MediaSort,
-        season: MediaSeason?,
-        seasonYear: Int?
-    ): Flow<Either<Failure, List<T>>>
+android.namespace = "${TsukiConfiguration.packageName}.ui.explore"
+
+ksp {
+    arg("compose-destinations.mode", "destinations")
+    arg("compose-destinations.moduleName", "explore")
+}
+
+dependencies {
+    implementation(projects.common.core)
+    implementation(projects.domain.explore)
+    implementation(projects.ui.base)
 }

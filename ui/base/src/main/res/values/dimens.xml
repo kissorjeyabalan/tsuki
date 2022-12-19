@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2022 Kissor Jeyabalan
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,10 +15,5 @@
   -->
 
 <resources>
-    <string name="app_name">Tsuki</string>
-    <string name="auth_expired_error_confirm">Log in</string>
-    <string name="auth_expired_error_title">Session expired</string>
-    <string name="auth_expired_error_description">Anilist session has expired. Please log in again to continue.</string>
-
-    <string name="navbar_destination_explore">Explore</string>
+    <dimen name="banner_height">168dp</dimen>
 </resources>

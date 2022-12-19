@@ -19,5 +19,5 @@ package no.kij.tsuki.domain.explore.failure
 import no.kij.tsuki.domain.base.failure.Failure
 
 sealed interface ExploreFailure : Failure {
-    object GetTrending : ExploreFailure
+    object GetExplore : ExploreFailure
 }

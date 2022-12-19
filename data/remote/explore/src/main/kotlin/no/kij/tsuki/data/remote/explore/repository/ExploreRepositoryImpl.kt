@@ -18,7 +18,6 @@ package no.kij.tsuki.data.remote.explore.repository
 
 import arrow.core.Either
 import kotlinx.coroutines.flow.Flow
-import no.kij.tsuki.data.remote.explore.source.ExploreRemoteSource
 import no.kij.tsuki.data.remote.explore.source.anime.AnimeExploreRemoteSource
 import no.kij.tsuki.domain.base.failure.Failure
 import no.kij.tsuki.domain.base.model.entry.MediaEntry
@@ -26,9 +25,19 @@ import no.kij.tsuki.domain.explore.repository.ExploreRepository
 import javax.inject.Inject
 
 internal class ExploreRepositoryImpl @Inject constructor(
-    private val exploreSource: ExploreRemoteSource,
     private val exploreAnimeSource: AnimeExploreRemoteSource
 ) : ExploreRepository {
-    override val trendingCollection: Flow<Either<Failure, List<MediaEntry.Anime>>>
+    override val trendingAnimeCollection
         get() = exploreAnimeSource.trendingCollection
+
+    override val popularSeasonAnimeCollection: Flow<Either<Failure, List<MediaEntry.Anime>>>
+        get() = exploreAnimeSource.popularSeasonCollection
+
+    override val upcomingAnimeCollection: Flow<Either<Failure, List<MediaEntry.Anime>>>
+        get() = exploreAnimeSource.upcomingCollection
+
+    override val popularAllTimeAnimeCollection: Flow<Either<Failure, List<MediaEntry.Anime>>>
+        get() = exploreAnimeSource.popularAllTimeCollection
+
+
 }

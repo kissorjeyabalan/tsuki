@@ -19,9 +19,11 @@ package no.kij.tsuki.domain.explore.repository
 import arrow.core.Either
 import kotlinx.coroutines.flow.Flow
 import no.kij.tsuki.domain.base.failure.Failure
-import no.kij.tsuki.domain.base.model.MediaCollection
 import no.kij.tsuki.domain.base.model.entry.MediaEntry
 
 interface ExploreRepository {
-    val trendingCollection: Flow<Either<Failure, List<MediaEntry.Anime>>>
+    val trendingAnimeCollection: Flow<Either<Failure, List<MediaEntry.Anime>>>
+    val popularSeasonAnimeCollection: Flow<Either<Failure, List<MediaEntry.Anime>>>
+    val upcomingAnimeCollection: Flow<Either<Failure, List<MediaEntry.Anime>>>
+    val popularAllTimeAnimeCollection: Flow<Either<Failure, List<MediaEntry.Anime>>>
 }

@@ -14,21 +14,16 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.data.remote.explore.source
+package no.kij.tsuki.ui.explore.entity.mapper
 
-import arrow.core.Either
-import kotlinx.coroutines.flow.Flow
-import no.kij.tsuki.data.remote.base.type.MediaSeason
-import no.kij.tsuki.data.remote.base.type.MediaSort
-import no.kij.tsuki.data.remote.base.type.MediaType
-import no.kij.tsuki.domain.base.failure.Failure
 import no.kij.tsuki.domain.base.model.entry.MediaEntry
+import no.kij.tsuki.ui.explore.entity.ExploreListItem
 
-internal interface ExploreRemoteSource {
-    fun <T : MediaEntry> getExploreList(
-        type: MediaType,
-        sort: MediaSort,
-        season: MediaSeason?,
-        seasonYear: Int?
-    ): Flow<Either<Failure, List<T>>>
-}
+internal fun List<MediaEntry.Anime>.toExploreItems(): List<ExploreListItem.AnimeListItem> =
+    map(MediaEntry.Anime::toMediaItem)
+
+
+private fun MediaEntry.Anime.toMediaItem() = ExploreListItem.AnimeListItem(
+    mediaId = id, title = title, cover = coverImage, format = format.toEntity()
+)
+

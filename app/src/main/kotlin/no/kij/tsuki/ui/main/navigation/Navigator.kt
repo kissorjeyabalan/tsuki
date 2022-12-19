@@ -17,17 +17,30 @@
 package no.kij.tsuki.ui.main.navigation
 
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.ramcosta.composedestinations.navigation.popUpTo
 import no.kij.tsuki.domain.base.logger.Logger
+import no.kij.tsuki.ui.explore.navigation.ExploreNavigator
 import no.kij.tsuki.ui.login.navigation.LoginNavigator
+import no.kij.tsuki.ui.login.view.destinations.LoginDestination
+import timber.log.Timber
 
 internal class Navigator(
     private val navigator: DestinationsNavigator
-) : LoginNavigator {
+) : LoginNavigator, ExploreNavigator {
     override fun goBack() {
         navigator.navigateUp()
     }
 
     override fun toHome() {
-        TODO("Navigate to home")
+        navigator.navigate(NavGraphs.home, onlyIfResumed = true) {
+            popUpTo(LoginDestination) {
+                inclusive = true
+            }
+        }
+    }
+
+    // Explore navigator
+    override fun openMedia(id: Int, from: ExploreNavigator.From) {
+        Timber.d("Navigating to $id from $from")
     }
 }

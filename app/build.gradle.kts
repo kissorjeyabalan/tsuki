@@ -49,7 +49,10 @@ dependencies {
     implementation(projects.domain.user)
 
     implementation(projects.ui.base)
+    implementation(projects.ui.explore)
     implementation(projects.ui.login)
 
     implementation(libs.sentry)
+
+    implementation(libs.timber)
 }

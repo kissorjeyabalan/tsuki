@@ -26,7 +26,7 @@ internal fun MediaPageQuery.Medium?.mediaEntry() = let { entry ->
     CommonMediaEntry(
         id = entry?.id.orZero(),
         title = entry?.title?.userPreferred.or(entry?.title?.romaji).orEmpty(),
-        coverImage = entry?.coverImage?.large.orEmpty(),
+        coverImage = entry?.coverImage?.extraLarge.orEmpty(),
         format = entry?.format.toFormat()
     )
 }

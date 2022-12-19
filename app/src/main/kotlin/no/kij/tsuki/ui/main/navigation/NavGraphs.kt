@@ -18,14 +18,17 @@ package no.kij.tsuki.ui.main.navigation
 
 import com.ramcosta.composedestinations.spec.DestinationSpec
 import com.ramcosta.composedestinations.spec.NavGraphSpec
+import no.kij.tsuki.ui.explore.navigation.ExploreNavGraph
 import no.kij.tsuki.ui.login.navigation.LoginNavGraph
 
 internal object NavGraphs {
     internal val home = object : NavGraphSpec {
         override val route = "home"
-        override val startRoute = LoginNavGraph// TODO("Swap to home")
+        override val startRoute = ExploreNavGraph
         override val destinationsByRoute = emptyMap<String, DestinationSpec<*>>()
-        override val nestedNavGraphs = emptyList<NavGraphSpec>()
+        override val nestedNavGraphs = listOf(
+            ExploreNavGraph
+        )
     }
 
     internal val root = object : NavGraphSpec {

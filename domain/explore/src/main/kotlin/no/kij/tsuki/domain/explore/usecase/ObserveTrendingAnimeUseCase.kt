@@ -16,10 +16,6 @@
 
 package no.kij.tsuki.domain.explore.usecase
 
-import arrow.core.Either
-import kotlinx.coroutines.flow.Flow
-import no.kij.tsuki.domain.base.failure.Failure
-import no.kij.tsuki.domain.base.model.MediaCollection
 import no.kij.tsuki.domain.base.model.entry.MediaEntry
 import no.kij.tsuki.domain.base.usecase.FlowUseCase
 import no.kij.tsuki.domain.explore.repository.ExploreRepository
@@ -28,5 +24,5 @@ import javax.inject.Inject
 class ObserveTrendingAnimeUseCase @Inject constructor(
     private val repository: ExploreRepository
 ) : FlowUseCase<Unit, List<MediaEntry.Anime>>() {
-    override fun createFlow(params: Unit) = repository.trendingCollection
+    override fun createFlow(params: Unit) = repository.trendingAnimeCollection
 }

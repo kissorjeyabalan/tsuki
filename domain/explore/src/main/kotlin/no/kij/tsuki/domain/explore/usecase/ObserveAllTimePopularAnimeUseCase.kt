@@ -14,21 +14,15 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.data.remote.explore.source
+package no.kij.tsuki.domain.explore.usecase
 
-import arrow.core.Either
-import kotlinx.coroutines.flow.Flow
-import no.kij.tsuki.data.remote.base.type.MediaSeason
-import no.kij.tsuki.data.remote.base.type.MediaSort
-import no.kij.tsuki.data.remote.base.type.MediaType
-import no.kij.tsuki.domain.base.failure.Failure
 import no.kij.tsuki.domain.base.model.entry.MediaEntry
+import no.kij.tsuki.domain.base.usecase.FlowUseCase
+import no.kij.tsuki.domain.explore.repository.ExploreRepository
+import javax.inject.Inject
 
-internal interface ExploreRemoteSource {
-    fun <T : MediaEntry> getExploreList(
-        type: MediaType,
-        sort: MediaSort,
-        season: MediaSeason?,
-        seasonYear: Int?
-    ): Flow<Either<Failure, List<T>>>
+class ObserveAllTimePopularAnimeUseCase @Inject constructor(
+    private val repository: ExploreRepository
+) : FlowUseCase<Unit, List<MediaEntry.Anime>>() {
+    override fun createFlow(params: Unit) = repository.popularAllTimeAnimeCollection
 }

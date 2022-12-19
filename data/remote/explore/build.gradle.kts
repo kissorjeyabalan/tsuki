@@ -15,6 +15,7 @@
  */
 @file:Suppress("DSL_SCOPE_VIOLATION")
 import no.kij.tsuki.buildlogic.TsukiConfiguration
+import no.kij.tsuki.buildlogic.desugar
 
 plugins {
     id("tsuki.android.library")
@@ -37,6 +38,5 @@ dependencies {
     implementation(projects.common.core)
     implementation(projects.data.remote.base)
     implementation(projects.domain.explore)
-    implementation(projects.domain.user)
     implementation(libs.bundles.data.remote)
 }

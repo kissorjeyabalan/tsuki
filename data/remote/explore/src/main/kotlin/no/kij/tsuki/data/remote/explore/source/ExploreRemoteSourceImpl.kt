@@ -45,7 +45,7 @@ import javax.inject.Inject
 internal class ExploreRemoteSourceImpl @Inject constructor(
     private val client: ApolloClient, private val reloadInterceptor: ReloadInterceptor, private val logger: Logger
 ) : ExploreRemoteSource {
-    override fun <T : MediaEntry> getExporeList(type: MediaType, sort: MediaSort, season: MediaSeason?, seasonYear:
+    override fun <T : MediaEntry> getExploreList(type: MediaType, sort: MediaSort, season: MediaSeason?, seasonYear:
     Int?):
             Flow<Either<Failure,
             List<T>>> =
@@ -71,8 +71,8 @@ internal class ExploreRemoteSourceImpl @Inject constructor(
                     emit(
                         when (CommonRemoteFailure(error)) {
                             CommonRemoteFailure.Cache -> Failure.Unknown
-                            CommonRemoteFailure.Network -> ExploreFailure.GetTrending
-                            CommonRemoteFailure.Response -> ExploreFailure.GetTrending
+                            CommonRemoteFailure.Network -> ExploreFailure.GetExplore
+                            CommonRemoteFailure.Response -> ExploreFailure.GetExplore
                             CommonRemoteFailure.Unknown -> Failure.Unknown
                         }.left()
                     )

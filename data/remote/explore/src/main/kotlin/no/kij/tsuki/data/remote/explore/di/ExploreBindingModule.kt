@@ -19,6 +19,7 @@ package no.kij.tsuki.data.remote.explore.di
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import no.kij.tsuki.data.remote.explore.repository.ExploreRepositoryImpl
 import no.kij.tsuki.data.remote.explore.source.ExploreRemoteSource
 import no.kij.tsuki.data.remote.explore.source.ExploreRemoteSourceImpl
@@ -27,7 +28,7 @@ import no.kij.tsuki.data.remote.explore.source.anime.AnimeExploreRemoteSourceImp
 import no.kij.tsuki.domain.explore.repository.ExploreRepository
 
 @Module
-@InstallIn
+@InstallIn(SingletonComponent::class)
 internal sealed interface ExploreBindingModule  {
     @Binds
     fun bindExploreRepository(impl: ExploreRepositoryImpl): ExploreRepository

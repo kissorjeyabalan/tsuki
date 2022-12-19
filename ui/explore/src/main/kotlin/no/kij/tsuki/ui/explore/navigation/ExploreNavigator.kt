@@ -14,21 +14,15 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.data.remote.explore.source
+package no.kij.tsuki.ui.explore.navigation
 
-import arrow.core.Either
-import kotlinx.coroutines.flow.Flow
-import no.kij.tsuki.data.remote.base.type.MediaSeason
-import no.kij.tsuki.data.remote.base.type.MediaSort
-import no.kij.tsuki.data.remote.base.type.MediaType
-import no.kij.tsuki.domain.base.failure.Failure
-import no.kij.tsuki.domain.base.model.entry.MediaEntry
+import no.kij.tsuki.ui.base.navigation.BaseNavigator
 
-internal interface ExploreRemoteSource {
-    fun <T : MediaEntry> getExploreList(
-        type: MediaType,
-        sort: MediaSort,
-        season: MediaSeason?,
-        seasonYear: Int?
-    ): Flow<Either<Failure, List<T>>>
+interface ExploreNavigator : BaseNavigator {
+    fun openMedia(id: Int, from: From)
+
+    enum class From {
+        ANIME,
+        MANGA
+    }
 }
