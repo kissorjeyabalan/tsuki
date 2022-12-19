@@ -17,7 +17,7 @@
 package no.kij.tsuki.domain.base.model
 
 import no.kij.tsuki.domain.base.model.entry.MediaEntry
-import no.kij.tsuki.domain.base.logger.list.MediaListGroup
+import no.kij.tsuki.domain.base.model.list.MediaListGroup
 
 @JvmInline
 value class MediaCollection<out T : MediaEntry>(val lists: List<MediaListGroup<T>>)

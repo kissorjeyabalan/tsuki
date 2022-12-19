@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.domain.base.logger.list
+package no.kij.tsuki.domain.base.model.list
 
 import no.kij.tsuki.domain.base.model.entry.MediaEntry
 
