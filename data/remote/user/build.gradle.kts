@@ -27,7 +27,7 @@ val pkg = "${TsukiConfiguration.packageName}.data.remote.user"
 android.namespace = pkg
 
 apollo {
-    service("service") {
+    service("anilist") {
         generateAsInternal.set(true)
         packageName.set(pkg)
     }

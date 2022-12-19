@@ -32,7 +32,7 @@ android {
 }
 
 apollo {
-    service("service") {
+    service("anilist") {
         alwaysGenerateTypesMatching.set(listOf("Query", "User"))
         generateApolloMetadata.set(true)
         packageName.set(pkg)
