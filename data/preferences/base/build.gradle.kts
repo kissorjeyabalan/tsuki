@@ -22,7 +22,7 @@ plugins {
 android.namespace = "${TsukiConfiguration.packageName}.data.preferences.base"
 
 dependencies {
-    implementation(projects.common.core)
+    implementation(projects.core.common)
     implementation(projects.domain.base)
     implementation(libs.bundles.data.preferences)
 }

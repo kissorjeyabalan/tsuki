@@ -19,6 +19,6 @@ plugins {
 }
 
 dependencies {
-    implementation(projects.common.core)
+    implementation(projects.core.common)
     api(projects.domain.base)
 }

@@ -16,12 +16,8 @@
 
 package no.kij.tsuki.data.remote.explore.mapper.response
 
-import arrow.core.prependTo
-import no.kij.tsuki.common.core.or
 import no.kij.tsuki.data.remote.base.type.MediaType
 import no.kij.tsuki.data.remote.explore.MediaPageQuery
-import no.kij.tsuki.domain.base.model.list.MediaListEntry
-import no.kij.tsuki.domain.base.model.entry.CommonMediaEntry
 import no.kij.tsuki.domain.base.model.entry.MediaEntry
 
 internal fun <T : MediaEntry> MediaPageQuery.Data.mediaList(type: MediaType): List<T> =

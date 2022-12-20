@@ -25,7 +25,7 @@ plugins {
 android.namespace = "${TsukiConfiguration.packageName}.data.preferences.auth"
 
 dependencies {
-    implementation(projects.common.core)
+    implementation(projects.core.common)
     implementation(projects.domain.auth)
     implementation(projects.data.preferences.base)
     implementation(libs.bundles.data.preferences)

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.common.core
+package no.kij.tsuki.core.common
 
 val String.Companion.empty get() = ""
 val String.Companion.dot get() = "."
