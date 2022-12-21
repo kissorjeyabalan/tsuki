@@ -29,6 +29,12 @@ dependencyResolutionManagement {
     }
 }
 
+buildCache {
+    local {
+        directory = rootDir.parentFile.resolve(".gradle/build-cache")
+    }
+}
+
 include(":common")
 include(":analysis-convention")
 include(":kotlin-convention")
