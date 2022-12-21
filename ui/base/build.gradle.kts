@@ -23,4 +23,5 @@ android.namespace = "${TsukiConfiguration.packageName}.ui.base"
 
 dependencies {
     implementation(projects.core.common)
+    implementation(libs.androidx.palette)
 }

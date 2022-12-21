@@ -27,6 +27,7 @@ query MediaPageQuery(
                 extraLarge
                 large
             }
+            bannerImage
         }
     }
 }

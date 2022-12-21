@@ -27,6 +27,7 @@ import no.kij.tsuki.domain.explore.usecase.ObserveUpcomingAnimeUseCase
 import no.kij.tsuki.ui.base.viewmodel.BaseViewModel
 import no.kij.tsuki.ui.explore.entity.ExploreListItem
 import no.kij.tsuki.ui.explore.entity.mapper.toExploreItems
+import no.kij.tsuki.ui.explore.view.ExploreCategory
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
@@ -56,6 +57,12 @@ internal class ExploreViewModel @Inject constructor(
     private val popularAllTimeFlow
         get() = observeAllTimePopularAnimeUseCase.flow
 
+
+    fun onExploreCategorySelected(category: ExploreCategory) {
+        updateState {
+            copy(selectedCategory = category)
+        }
+    }
 
     private fun observeLists() {
         refreshList()
@@ -145,7 +152,7 @@ internal class ExploreViewModel @Inject constructor(
         }
     }
 
-    internal fun refreshList() {
+    private fun refreshList() {
         updateState {
             copy(
                 loadingTrending = true,

@@ -20,6 +20,7 @@ data class CommonMediaEntry(
     val id: Int,
     val title: String,
     val coverImage: String,
+    val bannerImage: String,
     val format: Format
 ) {
     enum class Format {

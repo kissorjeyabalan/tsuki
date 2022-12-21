@@ -14,20 +14,10 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.ui.explore.entity.mapper
+package no.kij.tsuki.ui.explore.view
 
-import no.kij.tsuki.core.model.MediaEntry
-import no.kij.tsuki.ui.explore.entity.ExploreListItem
-
-internal fun List<MediaEntry.Anime>.toExploreItems(): List<ExploreListItem.AnimeListItem> =
-    map(MediaEntry.Anime::toMediaItem)
-
-
-private fun MediaEntry.Anime.toMediaItem() = ExploreListItem.AnimeListItem(
-    mediaId = id,
-    title = title,
-    cover = coverImage,
-    banner = bannerImage,
-    format = format.toEntity()
-)
-
+enum class ExploreCategory {
+    Upcoming,
+    Popular,
+    AllTime
+}

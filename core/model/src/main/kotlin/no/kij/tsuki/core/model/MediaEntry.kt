@@ -23,12 +23,14 @@ sealed class MediaEntry(
     val id: Int,
     val title: String,
     val coverImage: String,
+    val bannerImage: String,
     val format: CommonMediaEntry.Format
 ) {
     constructor(entry: CommonMediaEntry) : this(
         id = entry.id,
         title = entry.title,
         coverImage = entry.coverImage,
+        bannerImage = entry.bannerImage,
         format = entry.format
     )
 

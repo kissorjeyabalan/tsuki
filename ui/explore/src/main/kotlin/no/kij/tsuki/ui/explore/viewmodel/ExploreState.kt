@@ -19,6 +19,7 @@ package no.kij.tsuki.ui.explore.viewmodel
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import no.kij.tsuki.ui.explore.entity.ExploreListItem
+import no.kij.tsuki.ui.explore.view.ExploreCategory
 
 internal data class ExploreState<T : ExploreListItem>(
     val trending: ImmutableList<T> = persistentListOf(),
@@ -35,6 +36,8 @@ internal data class ExploreState<T : ExploreListItem>(
     val errorPopular: Boolean = false,
     val errorUpcoming: Boolean = false,
     val errorAllTime: Boolean = false,
+
+    val selectedCategory: ExploreCategory = ExploreCategory.Popular
 ) {
     val isLoading
         get() = if (isError) {

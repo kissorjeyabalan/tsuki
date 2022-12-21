@@ -27,6 +27,7 @@ internal sealed interface ExploreListItem : Parcelable {
     val mediaId: Int
     val title: String
     val cover: String
+    val banner: String
     val format: Format
 
     @Parcelize
@@ -34,6 +35,7 @@ internal sealed interface ExploreListItem : Parcelable {
         override val mediaId: Int,
         override val title: String,
         override val cover: String,
+        override val banner: String,
         override val format: Format
     ) : ExploreListItem
 

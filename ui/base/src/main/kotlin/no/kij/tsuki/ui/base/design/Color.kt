@@ -19,6 +19,10 @@ package no.kij.tsuki.ui.base.design
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.compositeOver
+import androidx.compose.ui.graphics.luminance
+import kotlin.math.max
+import kotlin.math.min
 
 // Seed: #d87683 /
 // Surface Tint Color: Color(0xFF9B404F)
@@ -85,3 +89,11 @@ internal val DarkColors = darkColorScheme(
     inversePrimary = Color(0xFF9B404F),
     surfaceTint = Color(0xFFFFB2BA),
 )
+
+const val MinContrastOfPrimaryVsSurface = 3f
+fun Color.contrastAgainst(background: Color): Float {
+    val fg = if (alpha < 1f) compositeOver(background) else this
+    val fgLuminance = fg.luminance() + 0.05f
+    val bgLuminance = background.luminance() + 0.05f
+    return max(fgLuminance, bgLuminance) / min(fgLuminance, bgLuminance)
+}
