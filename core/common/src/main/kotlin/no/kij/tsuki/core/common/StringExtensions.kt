@@ -21,8 +21,3 @@ val String.Companion.dot get() = "."
 val String.Companion.comma get() = ","
 val String.Companion.dash get() = "-"
 val String.Companion.unknown get() = "?"
-
-fun String?.or(str: String?): String? {
-    if (str.isNullOrBlank()) return null
-    return str
-}

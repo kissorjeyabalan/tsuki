@@ -18,8 +18,8 @@ package no.kij.tsuki.data.remote.explore.source.anime
 
 import arrow.core.Either
 import kotlinx.coroutines.flow.Flow
+import no.kij.tsuki.core.model.MediaEntry
 import no.kij.tsuki.domain.base.failure.Failure
-import no.kij.tsuki.domain.base.model.entry.MediaEntry
 
 internal interface AnimeExploreRemoteSource {
     val trendingCollection: Flow<Either<Failure, List<MediaEntry.Anime>>>

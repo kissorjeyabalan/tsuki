@@ -29,6 +29,7 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
+import no.kij.tsuki.core.model.MediaEntry
 import no.kij.tsuki.data.remote.base.failure.CommonRemoteFailure
 import no.kij.tsuki.data.remote.base.interceptor.ReloadInterceptor
 import no.kij.tsuki.data.remote.base.type.MediaSeason
@@ -38,7 +39,6 @@ import no.kij.tsuki.data.remote.explore.MediaPageQuery
 import no.kij.tsuki.data.remote.explore.mapper.response.mediaList
 import no.kij.tsuki.domain.base.failure.Failure
 import no.kij.tsuki.domain.base.logger.Logger
-import no.kij.tsuki.domain.base.model.entry.MediaEntry
 import no.kij.tsuki.domain.explore.failure.ExploreFailure
 import javax.inject.Inject
 

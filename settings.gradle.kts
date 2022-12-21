@@ -47,6 +47,12 @@ gradleEnterprise {
     }
 }
 
+buildCache {
+    local {
+        directory = rootDir.resolve(".gradle/build-cache")
+    }
+}
+
 include(":app")
 
 listOf<String>("common", "core", "data/preferences", "data/remote", "domain", "ui").forEach { dir ->

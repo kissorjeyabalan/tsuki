@@ -18,9 +18,9 @@ package no.kij.tsuki.data.remote.explore.repository
 
 import arrow.core.Either
 import kotlinx.coroutines.flow.Flow
+import no.kij.tsuki.core.model.MediaEntry
 import no.kij.tsuki.data.remote.explore.source.anime.AnimeExploreRemoteSource
 import no.kij.tsuki.domain.base.failure.Failure
-import no.kij.tsuki.domain.base.model.entry.MediaEntry
 import no.kij.tsuki.domain.explore.repository.ExploreRepository
 import javax.inject.Inject
 

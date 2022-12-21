@@ -14,11 +14,6 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.domain.base.model.list
-
-import no.kij.tsuki.domain.base.model.entry.MediaEntry
-
-data class MediaListEntry<out T: MediaEntry>(
-    val list: MediaList,
-    val entry: T
-)
+ plugins {
+     id("tsuki.kotlin")
+ }

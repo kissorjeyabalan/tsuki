@@ -14,9 +14,7 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.domain.base.model.entry
-
-import java.text.Format
+package no.kij.tsuki.core.model
 
 data class CommonMediaEntry(
     val id: Int,

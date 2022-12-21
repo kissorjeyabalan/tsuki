@@ -18,8 +18,8 @@ package no.kij.tsuki.domain.explore.repository
 
 import arrow.core.Either
 import kotlinx.coroutines.flow.Flow
+import no.kij.tsuki.core.model.MediaEntry
 import no.kij.tsuki.domain.base.failure.Failure
-import no.kij.tsuki.domain.base.model.entry.MediaEntry
 
 interface ExploreRepository {
     val trendingAnimeCollection: Flow<Either<Failure, List<MediaEntry.Anime>>>

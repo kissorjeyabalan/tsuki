@@ -16,16 +16,15 @@
 
 package no.kij.tsuki.data.remote.explore.mapper.response
 
-import no.kij.tsuki.core.common.or
 import no.kij.tsuki.core.common.orZero
+import no.kij.tsuki.core.model.CommonMediaEntry
 import no.kij.tsuki.data.remote.base.type.MediaFormat
 import no.kij.tsuki.data.remote.explore.MediaPageQuery
-import no.kij.tsuki.domain.base.model.entry.CommonMediaEntry
 
 internal fun MediaPageQuery.Medium?.mediaEntry() = let { entry ->
     CommonMediaEntry(
         id = entry?.id.orZero(),
-        title = entry?.title?.userPreferred.or(entry?.title?.romaji).orEmpty(),
+        title = entry?.title?.userPreferred ?: entry?.title?.romaji.orEmpty(),
         coverImage = entry?.coverImage?.extraLarge.orEmpty(),
         format = entry?.format.toFormat()
     )

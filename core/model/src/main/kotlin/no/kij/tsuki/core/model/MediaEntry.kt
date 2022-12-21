@@ -14,21 +14,32 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.domain.base.model.list
+package no.kij.tsuki.core.model
 
-import java.time.LocalDate
+import java.text.Format
 import java.time.LocalDateTime
 
-data class MediaList(
+sealed class MediaEntry(
     val id: Int,
-    val score: Double,
-    val progress: Int,
-    val progressVolumes: Int?,
-    val repeat: Int,
-    val private: Boolean,
-    val notes: String,
-    val hiddenFromStatusLists: Boolean,
-    val startedAt: LocalDate?,
-    val completedAt: LocalDate?,
-    val updatedAt: LocalDateTime?
-)
+    val title: String,
+    val coverImage: String,
+    val format: CommonMediaEntry.Format
+) {
+    constructor(entry: CommonMediaEntry) : this(
+        id = entry.id,
+        title = entry.title,
+        coverImage = entry.coverImage,
+        format = entry.format
+    )
+
+    data class Anime(
+        val entry: CommonMediaEntry,
+        val episodes: Int?,
+        val nextEpisode: NextEpisode?
+    ) : MediaEntry(entry) {
+        data class NextEpisode(
+            val number: Int,
+            val at: LocalDateTime
+        )
+    }
+}

@@ -16,9 +16,9 @@
 
 package no.kij.tsuki.data.remote.explore.mapper.response
 
+import no.kij.tsuki.core.model.MediaEntry
 import no.kij.tsuki.data.remote.base.type.MediaType
 import no.kij.tsuki.data.remote.explore.MediaPageQuery
-import no.kij.tsuki.domain.base.model.entry.MediaEntry
 
 internal fun <T : MediaEntry> MediaPageQuery.Data.mediaList(type: MediaType): List<T> =
     page.media.asSequence().mapNotNull { media ->
@@ -32,8 +32,7 @@ private fun <T : MediaEntry> MediaPageQuery.Medium.toModel(type: MediaType) =
     }
 
 private fun MediaPageQuery.Medium.toMedia(type: MediaType) = type.onMediaEntry(
-    anime = ::animeEntry,
-    manga = ::mangaEntry
+    anime = ::animeEntry
 )
 
 private fun MediaPageQuery.Medium.animeEntry() = let { entry ->
@@ -44,19 +43,9 @@ private fun MediaPageQuery.Medium.animeEntry() = let { entry ->
     )
 }
 
-private fun MediaPageQuery.Medium.mangaEntry() = let { entry ->
-    MediaEntry.Manga(
-        entry = mediaEntry(),
-        chapters = null,
-        volume = null
-    )
-}
-
 internal fun <R> MediaType.onMediaEntry(
-    anime: () -> R,
-    manga: () -> R
+    anime: () -> R
 ): R = when(this) {
     MediaType.ANIME -> anime()
-    MediaType.MANGA -> manga()
     else -> error("unsupport media type")
 }

@@ -16,7 +16,7 @@
 
 package no.kij.tsuki.domain.explore.usecase
 
-import no.kij.tsuki.domain.base.model.entry.MediaEntry
+import no.kij.tsuki.core.model.MediaEntry
 import no.kij.tsuki.domain.base.usecase.FlowUseCase
 import no.kij.tsuki.domain.explore.repository.ExploreRepository
 import javax.inject.Inject
