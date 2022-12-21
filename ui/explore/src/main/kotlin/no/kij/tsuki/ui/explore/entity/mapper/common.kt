@@ -16,7 +16,7 @@
 
 package no.kij.tsuki.ui.explore.entity.mapper
 
-import no.kij.tsuki.domain.base.model.entry.CommonMediaEntry
+import no.kij.tsuki.core.model.CommonMediaEntry
 import no.kij.tsuki.ui.explore.entity.ExploreListItem
 
 internal fun CommonMediaEntry.Format.toEntity() = when (this) {

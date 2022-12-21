@@ -18,13 +18,13 @@ package no.kij.tsuki.data.remote.explore.source.anime
 
 import arrow.core.Either
 import kotlinx.coroutines.flow.Flow
+import no.kij.tsuki.core.model.MediaEntry
 import no.kij.tsuki.data.remote.base.type.MediaSort
 import no.kij.tsuki.data.remote.base.type.MediaType
 import no.kij.tsuki.data.remote.explore.nextSeason
 import no.kij.tsuki.data.remote.explore.season
 import no.kij.tsuki.data.remote.explore.source.ExploreRemoteSource
 import no.kij.tsuki.domain.base.failure.Failure
-import no.kij.tsuki.domain.base.model.entry.MediaEntry
 import java.time.LocalDate
 import javax.inject.Inject
 import javax.inject.Singleton

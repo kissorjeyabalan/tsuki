@@ -33,7 +33,11 @@ android {
 
 apollo {
     service("anilist") {
-        alwaysGenerateTypesMatching.set(listOf("Query", "User"))
+        alwaysGenerateTypesMatching.set(
+            listOf(
+                "Query"
+            )
+        )
         generateApolloMetadata.set(true)
         packageName.set(pkg)
 
@@ -46,6 +50,7 @@ apollo {
 
 dependencies {
     implementation(projects.core.common)
+    implementation(projects.core.model)
     implementation(projects.domain.auth)
     implementation(libs.bundles.data.remote)
     implementation(libs.apollo.cache.sql)

@@ -16,7 +16,7 @@
 
 package no.kij.tsuki.ui.explore.entity.mapper
 
-import no.kij.tsuki.domain.base.model.entry.MediaEntry
+import no.kij.tsuki.core.model.MediaEntry
 import no.kij.tsuki.ui.explore.entity.ExploreListItem
 
 internal fun List<MediaEntry.Anime>.toExploreItems(): List<ExploreListItem.AnimeListItem> =

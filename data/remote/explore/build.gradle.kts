@@ -36,6 +36,7 @@ apollo {
 dependencies {
     apolloMetadata(projects.data.remote.base)
     implementation(projects.core.common)
+    implementation(projects.core.model)
     implementation(projects.data.remote.base)
     implementation(projects.domain.explore)
     implementation(libs.bundles.data.remote)

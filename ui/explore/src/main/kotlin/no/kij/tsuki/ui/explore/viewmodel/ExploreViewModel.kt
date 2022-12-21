@@ -18,7 +18,7 @@ package no.kij.tsuki.ui.explore.viewmodel
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.toImmutableList
-import no.kij.tsuki.domain.base.model.entry.MediaEntry
+import no.kij.tsuki.core.model.MediaEntry
 import no.kij.tsuki.domain.base.usecase.invoke
 import no.kij.tsuki.domain.explore.usecase.ObserveAllTimePopularAnimeUseCase
 import no.kij.tsuki.domain.explore.usecase.ObserveSeasonPopularAnimeUseCase

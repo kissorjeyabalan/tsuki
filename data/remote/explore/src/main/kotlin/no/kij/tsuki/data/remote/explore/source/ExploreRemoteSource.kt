@@ -18,11 +18,11 @@ package no.kij.tsuki.data.remote.explore.source
 
 import arrow.core.Either
 import kotlinx.coroutines.flow.Flow
+import no.kij.tsuki.core.model.MediaEntry
 import no.kij.tsuki.data.remote.base.type.MediaSeason
 import no.kij.tsuki.data.remote.base.type.MediaSort
 import no.kij.tsuki.data.remote.base.type.MediaType
 import no.kij.tsuki.domain.base.failure.Failure
-import no.kij.tsuki.domain.base.model.entry.MediaEntry
 
 internal interface ExploreRemoteSource {
     fun <T : MediaEntry> getExploreList(

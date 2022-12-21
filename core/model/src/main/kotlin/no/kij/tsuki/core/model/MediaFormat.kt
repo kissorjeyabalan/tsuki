@@ -14,10 +14,5 @@
  * limitations under the License.
  */
 
-package no.kij.tsuki.domain.base.model
+package no.kij.tsuki.core.model
 
-import no.kij.tsuki.domain.base.model.entry.MediaEntry
-import no.kij.tsuki.domain.base.model.list.MediaListGroup
-
-@JvmInline
-value class MediaCollection<out T : MediaEntry>(val lists: List<MediaListGroup<T>>)
