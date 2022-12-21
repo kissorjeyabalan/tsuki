@@ -32,7 +32,7 @@ sentry {
 }
 
 dependencies {
-    implementation(projects.common.core)
+    implementation(projects.core.common)
 
     implementation(projects.core.logging)
 

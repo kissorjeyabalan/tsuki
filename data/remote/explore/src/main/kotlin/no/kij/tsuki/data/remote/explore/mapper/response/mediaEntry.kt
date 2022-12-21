@@ -16,8 +16,8 @@
 
 package no.kij.tsuki.data.remote.explore.mapper.response
 
-import no.kij.tsuki.common.core.or
-import no.kij.tsuki.common.core.orZero
+import no.kij.tsuki.core.common.or
+import no.kij.tsuki.core.common.orZero
 import no.kij.tsuki.data.remote.base.type.MediaFormat
 import no.kij.tsuki.data.remote.explore.MediaPageQuery
 import no.kij.tsuki.domain.base.model.entry.CommonMediaEntry

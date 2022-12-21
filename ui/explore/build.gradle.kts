@@ -29,7 +29,7 @@ ksp {
 }
 
 dependencies {
-    implementation(projects.common.core)
+    implementation(projects.core.common)
     implementation(projects.domain.explore)
     implementation(projects.ui.base)
 }

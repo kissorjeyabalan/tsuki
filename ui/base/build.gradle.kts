@@ -22,5 +22,5 @@ plugins {
 android.namespace = "${TsukiConfiguration.packageName}.ui.base"
 
 dependencies {
-    implementation(projects.common.core)
+    implementation(projects.core.common)
 }

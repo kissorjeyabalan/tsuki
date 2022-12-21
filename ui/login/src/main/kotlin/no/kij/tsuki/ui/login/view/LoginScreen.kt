@@ -81,7 +81,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.DeepLink
 import com.ramcosta.composedestinations.annotation.Destination
 import kotlinx.coroutines.launch
-import no.kij.tsuki.common.core.zero
+import no.kij.tsuki.core.common.zero
 import no.kij.tsuki.ui.base.design.spacing
 import no.kij.tsuki.ui.login.ANILIST_LOGIN
 import no.kij.tsuki.ui.login.ANILIST_SIGN_UP
