@@ -22,17 +22,17 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import com.ramcosta.composedestinations.spec.NavGraphSpec
 import kotlinx.collections.immutable.persistentListOf
 import no.kij.tsuki.R
-import no.kij.tsuki.ui.explore.navigation.ExploreNavGraph
+import no.kij.tsuki.ui.discover.navigation.DiscoverNavGraph
 
 internal enum class HomeNavigationBarItem(
     override val direction: NavGraphSpec,
     override val icon: ImageVector,
     override val label: Int
 ) : NavigationBarItem {
-    Explore(ExploreNavGraph, Icons.TwoTone.Explore, R.string.navbar_destination_explore);
+    Discover(DiscoverNavGraph, Icons.TwoTone.Explore, R.string.navbar_destination_discover);
 
     companion object {
         @JvmField
-        val values = persistentListOf(Explore)
+        val values = persistentListOf(Discover)
     }
 }

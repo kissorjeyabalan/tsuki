@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2022 Kissor Jeyabalan
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~         http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+    <string name="discover_entry_format_tv">TV</string>
+    <string name="discover_entry_format_tv_short">TV Short</string>
+    <string name="discover_entry_format_movie">Movie</string>
+    <string name="discover_entry_format_special">Special</string>
+    <string name="discover_entry_format_ova">OVA</string>
+    <string name="discover_entry_format_ona">ONA</string>
+    <string name="discover_entry_format_music">Music</string>
+    <string name="discover_entry_format_manga">Manga</string>
+    <string name="discover_entry_format_novel">Light Novel</string>
+    <string name="discover_entry_format_one_shot">One Shot</string>
+    <string name="discover_entry_format_unknown">Unknown</string>
+
+    <string name="trending">Trending</string>
+    <string name="popular_this_season">Popular this season</string>
+    <string name="upcoming_next_season">Upcoming season</string>
+    <string name="all_time_popular">All time popular</string>
+</resources>
