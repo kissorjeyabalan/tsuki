@@ -40,16 +40,16 @@ dependencies {
     implementation(projects.data.preferences.auth)
 
     implementation(projects.data.remote.base)
-    implementation(projects.data.remote.explore)
+    implementation(projects.data.remote.discover)
     implementation(projects.data.remote.user)
 
     implementation(projects.domain.base)
     implementation(projects.domain.auth)
-    implementation(projects.domain.explore)
+    implementation(projects.domain.discover)
     implementation(projects.domain.user)
 
     implementation(projects.ui.base)
-    implementation(projects.ui.explore)
+    implementation(projects.ui.discover)
     implementation(projects.ui.login)
 
     implementation(libs.sentry)

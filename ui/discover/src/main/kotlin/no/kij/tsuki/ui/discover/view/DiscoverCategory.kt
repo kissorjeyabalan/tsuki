@@ -14,23 +14,10 @@
  * limitations under the License.
  */
 
-import no.kij.tsuki.buildlogic.TsukiConfiguration
+package no.kij.tsuki.ui.discover.view
 
-plugins {
-    id("tsuki.android.compose")
-}
-
-android.namespace = "${TsukiConfiguration.packageName}.ui.login"
-
-ksp {
-    arg("compose-destinations.mode", "destinations")
-    arg("compose-destinations.moduleName", "login")
-}
-
-dependencies {
-    implementation(projects.core.common)
-    implementation(projects.ui.base)
-    implementation(projects.domain.auth)
-    implementation(projects.domain.user)
-    implementation(libs.androidx.browser)
+enum class DiscoverCategory {
+    Upcoming,
+    Popular,
+    AllTime
 }

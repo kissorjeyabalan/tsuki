@@ -18,19 +18,19 @@ import no.kij.tsuki.buildlogic.TsukiConfiguration
 
 plugins {
     id("tsuki.android.compose")
+    id("org.jetbrains.kotlin.plugin.parcelize")
 }
 
-android.namespace = "${TsukiConfiguration.packageName}.ui.login"
+android.namespace = "${TsukiConfiguration.packageName}.ui.discover"
 
 ksp {
     arg("compose-destinations.mode", "destinations")
-    arg("compose-destinations.moduleName", "login")
+    arg("compose-destinations.moduleName", "discover")
 }
 
 dependencies {
     implementation(projects.core.common)
+    implementation(projects.core.model)
+    implementation(projects.domain.discover)
     implementation(projects.ui.base)
-    implementation(projects.domain.auth)
-    implementation(projects.domain.user)
-    implementation(libs.androidx.browser)
 }

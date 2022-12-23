@@ -13,24 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+@file:Suppress("DSL_SCOPE_VIOLATION")
 import no.kij.tsuki.buildlogic.TsukiConfiguration
+import no.kij.tsuki.buildlogic.desugar
 
 plugins {
-    id("tsuki.android.compose")
+    id("tsuki.android.library")
+    alias(libs.plugins.apollo)
 }
 
-android.namespace = "${TsukiConfiguration.packageName}.ui.login"
+val pkg = "${TsukiConfiguration.packageName}.data.remote.discover"
 
-ksp {
-    arg("compose-destinations.mode", "destinations")
-    arg("compose-destinations.moduleName", "login")
+android.namespace = pkg
+
+apollo {
+    service("anilist") {
+        generateAsInternal.set(true)
+        packageName.set(pkg)
+    }
 }
 
 dependencies {
+    apolloMetadata(projects.data.remote.base)
     implementation(projects.core.common)
-    implementation(projects.ui.base)
-    implementation(projects.domain.auth)
-    implementation(projects.domain.user)
-    implementation(libs.androidx.browser)
+    implementation(projects.core.model)
+    implementation(projects.data.remote.base)
+    implementation(projects.domain.discover)
+    implementation(libs.bundles.data.remote)
 }

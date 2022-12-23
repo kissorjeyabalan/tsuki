@@ -14,23 +14,10 @@
  * limitations under the License.
  */
 
-import no.kij.tsuki.buildlogic.TsukiConfiguration
+package no.kij.tsuki.domain.discover.failure
 
-plugins {
-    id("tsuki.android.compose")
-}
+import no.kij.tsuki.domain.base.failure.Failure
 
-android.namespace = "${TsukiConfiguration.packageName}.ui.login"
-
-ksp {
-    arg("compose-destinations.mode", "destinations")
-    arg("compose-destinations.moduleName", "login")
-}
-
-dependencies {
-    implementation(projects.core.common)
-    implementation(projects.ui.base)
-    implementation(projects.domain.auth)
-    implementation(projects.domain.user)
-    implementation(libs.androidx.browser)
+sealed interface DiscoverFailure : Failure {
+    object GetDiscover : DiscoverFailure
 }

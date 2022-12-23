@@ -14,23 +14,16 @@
  * limitations under the License.
  */
 
-import no.kij.tsuki.buildlogic.TsukiConfiguration
+package no.kij.tsuki.data.remote.discover.source.anime
 
-plugins {
-    id("tsuki.android.compose")
-}
+import arrow.core.Either
+import kotlinx.coroutines.flow.Flow
+import no.kij.tsuki.core.model.MediaEntry
+import no.kij.tsuki.domain.base.failure.Failure
 
-android.namespace = "${TsukiConfiguration.packageName}.ui.login"
-
-ksp {
-    arg("compose-destinations.mode", "destinations")
-    arg("compose-destinations.moduleName", "login")
-}
-
-dependencies {
-    implementation(projects.core.common)
-    implementation(projects.ui.base)
-    implementation(projects.domain.auth)
-    implementation(projects.domain.user)
-    implementation(libs.androidx.browser)
+internal interface AnimeDiscoverRemoteSource {
+    val trendingCollection: Flow<Either<Failure, List<MediaEntry.Anime>>>
+    val popularSeasonCollection: Flow<Either<Failure, List<MediaEntry.Anime>>>
+    val upcomingCollection: Flow<Either<Failure, List<MediaEntry.Anime>>>
+    val popularAllTimeCollection: Flow<Either<Failure, List<MediaEntry.Anime>>>
 }

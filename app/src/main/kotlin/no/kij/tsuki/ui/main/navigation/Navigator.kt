@@ -18,15 +18,14 @@ package no.kij.tsuki.ui.main.navigation
 
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.popUpTo
-import no.kij.tsuki.domain.base.logger.Logger
-import no.kij.tsuki.ui.explore.navigation.ExploreNavigator
+import no.kij.tsuki.ui.discover.navigation.DiscoverNavigator
 import no.kij.tsuki.ui.login.navigation.LoginNavigator
 import no.kij.tsuki.ui.login.view.destinations.LoginDestination
 import timber.log.Timber
 
 internal class Navigator(
     private val navigator: DestinationsNavigator
-) : LoginNavigator, ExploreNavigator {
+) : LoginNavigator, DiscoverNavigator {
     override fun goBack() {
         navigator.navigateUp()
     }
@@ -40,7 +39,7 @@ internal class Navigator(
     }
 
     // Explore navigator
-    override fun openMedia(id: Int, from: ExploreNavigator.From) {
+    override fun openMedia(id: Int, from: DiscoverNavigator.From) {
         Timber.d("Navigating to $id from $from")
     }
 }

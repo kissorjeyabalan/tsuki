@@ -14,23 +14,20 @@
  * limitations under the License.
  */
 
-import no.kij.tsuki.buildlogic.TsukiConfiguration
+package no.kij.tsuki.ui.discover.entity.mapper
 
-plugins {
-    id("tsuki.android.compose")
-}
+import no.kij.tsuki.core.model.MediaEntry
+import no.kij.tsuki.ui.discover.entity.DiscoverListItem
 
-android.namespace = "${TsukiConfiguration.packageName}.ui.login"
+internal fun List<MediaEntry.Anime>.toDiscoverItems(): List<DiscoverListItem.AnimeListItem> =
+    map(MediaEntry.Anime::toMediaItem)
 
-ksp {
-    arg("compose-destinations.mode", "destinations")
-    arg("compose-destinations.moduleName", "login")
-}
 
-dependencies {
-    implementation(projects.core.common)
-    implementation(projects.ui.base)
-    implementation(projects.domain.auth)
-    implementation(projects.domain.user)
-    implementation(libs.androidx.browser)
-}
+private fun MediaEntry.Anime.toMediaItem() = DiscoverListItem.AnimeListItem(
+    mediaId = id,
+    title = title,
+    cover = coverImage,
+    banner = bannerImage,
+    format = format.toEntity()
+)
+

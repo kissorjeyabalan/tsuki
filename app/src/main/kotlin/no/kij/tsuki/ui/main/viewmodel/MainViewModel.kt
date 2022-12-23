@@ -23,7 +23,6 @@ import no.kij.tsuki.domain.auth.usecase.ClearAuthenticationUseCase
 import no.kij.tsuki.domain.auth.usecase.GetAnilistTokenUseCase
 import no.kij.tsuki.domain.auth.usecase.ObserveAuthenticationUseCase
 import no.kij.tsuki.ui.base.viewmodel.BaseViewModel
-import no.kij.tsuki.ui.explore.navigation.ExploreNavGraph
 import no.kij.tsuki.ui.login.navigation.LoginNavGraph
 import no.kij.tsuki.ui.main.navigation.NavGraphs
 import org.orbitmvi.orbit.syntax.simple.intent

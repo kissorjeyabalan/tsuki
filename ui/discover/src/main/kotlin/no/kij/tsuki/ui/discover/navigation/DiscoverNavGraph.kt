@@ -14,23 +14,17 @@
  * limitations under the License.
  */
 
-import no.kij.tsuki.buildlogic.TsukiConfiguration
+package no.kij.tsuki.ui.discover.navigation
 
-plugins {
-    id("tsuki.android.compose")
-}
+import com.ramcosta.composedestinations.dynamic.routedIn
+import com.ramcosta.composedestinations.spec.NavGraphSpec
+import no.kij.tsuki.ui.discover.view.destinations.DiscoverScreenDestination
 
-android.namespace = "${TsukiConfiguration.packageName}.ui.login"
-
-ksp {
-    arg("compose-destinations.mode", "destinations")
-    arg("compose-destinations.moduleName", "login")
-}
-
-dependencies {
-    implementation(projects.core.common)
-    implementation(projects.ui.base)
-    implementation(projects.domain.auth)
-    implementation(projects.domain.user)
-    implementation(libs.androidx.browser)
+object DiscoverNavGraph : NavGraphSpec {
+    override val route = "discover"
+    override val startRoute = DiscoverScreenDestination routedIn this
+    override val destinationsByRoute =
+        listOf(DiscoverScreenDestination)
+            .routedIn(this)
+            .associateBy { it.route }
 }
