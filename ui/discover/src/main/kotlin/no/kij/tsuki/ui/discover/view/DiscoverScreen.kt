@@ -17,10 +17,14 @@
 package no.kij.tsuki.ui.discover.view
 
 import android.annotation.SuppressLint
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
@@ -36,6 +40,7 @@ import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.layout.windowInsetsTopHeight
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -56,14 +61,22 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
@@ -73,10 +86,13 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
 import com.ramcosta.composedestinations.annotation.Destination
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import no.kij.tsuki.core.common.unknown
 import no.kij.tsuki.ui.base.design.MinContrastOfPrimaryVsSurface
 import no.kij.tsuki.ui.base.design.contrastAgainst
 import no.kij.tsuki.ui.base.design.verticalGradientScrim
+import no.kij.tsuki.ui.base.util.BlurTransformation
 import no.kij.tsuki.ui.base.util.DynamicThemePrimaryColorsFromImage
 import no.kij.tsuki.ui.base.util.rememberDominantColorState
 import no.kij.tsuki.ui.discover.entity.DiscoverListItem
@@ -140,12 +156,33 @@ internal fun DiscoverContent(
 
         DynamicThemePrimaryColorsFromImage(dominantColorState) {
             val pagerState = rememberPagerState()
-            val selectedImageUrl = state.trending.getOrNull(pagerState.currentPage)?.cover
+            val selectedImageUrl = state.trending.getOrNull(pagerState.currentPage)?.banner ?: state.trending.getOrNull(
+                pagerState.currentPage
+            )?.cover
             LaunchedEffect(selectedImageUrl) {
                 if (selectedImageUrl.isNullOrEmpty()) {
                     dominantColorState.reset()
                 } else {
                     dominantColorState.updateColorsFromImageUrl(selectedImageUrl)
+                }
+            }
+
+            val isDragged by pagerState.interactionSource.collectIsDraggedAsState()
+            if (!isDragged) {
+                LaunchedEffect(pagerState) {
+                    launch {
+                        repeat(Int.MAX_VALUE) {
+                            delay(3000)
+                            with(pagerState) {
+                                val target = if (currentPage < pageCount - 1) currentPage + 1 else 0
+                                animateScrollToPage(
+                                    page = target, animationSpec = tween(
+                                        durationMillis = 1000, easing = FastOutSlowInEasing
+                                    )
+                                )
+                            }
+                        }
+                    }
                 }
             }
 
@@ -172,13 +209,11 @@ internal fun DiscoverContent(
                 )
 
                 if (state.trending.isNotEmpty()) {
-                    Spacer(Modifier.height(16.dp))
 
                     FeaturedMedia(
                         items = state.trending,
                         pagerState = pagerState,
                         modifier = Modifier
-                            .padding(start = 24.dp, top = 16.dp, end = 24.dp)
                             .fillMaxWidth()
                             .height(200.dp)
                     )
@@ -221,25 +256,24 @@ internal fun DiscoverContent(
 
 @Composable
 private fun MediaList(
-    selectedCategory: DiscoverCategory,
-    items: List<DiscoverListItem.AnimeListItem>,
-    modifier: Modifier = Modifier
+    selectedCategory: DiscoverCategory, items: List<DiscoverListItem.AnimeListItem>, modifier: Modifier = Modifier
 ) {
     Column(modifier) {
         Spacer(Modifier.height(8.dp))
         Column(Modifier.fillMaxSize()) {
             val lastIndex = items.size - 1
-            LazyRow(
+            LazyColumn(
                 modifier = modifier,
                 contentPadding = PaddingValues(start = 24.dp, top = 8.dp, end = 24.dp, bottom = 24.dp)
             ) {
-                itemsIndexed(items = items) { index: Int, anime ->
+                itemsIndexed(items) { index, anime ->
                     TopMediaRowItem(
                         title = anime.title,
                         image = anime.cover,
-                        modifier = Modifier.width(128.dp)
+                        banner = anime.banner,
+                        modifier = Modifier.fillMaxWidth()
                     )
-                    if (index < lastIndex) Spacer(Modifier.width(24.dp))
+                    if (index < lastIndex) Spacer(Modifier.height(18.dp))
                 }
             }
         }
@@ -248,40 +282,63 @@ private fun MediaList(
 
 @Composable
 private fun TopMediaRowItem(
-    title: String,
-    image: String,
-    modifier: Modifier = Modifier
+    title: String, image: String, banner: String, modifier: Modifier = Modifier
 ) {
-    Column(
-        modifier.semantics(mergeDescendants = true) {}
-    ) {
-        Box(
-            Modifier
-                .fillMaxWidth()
-                .aspectRatio(1f)
-                .align(Alignment.CenterHorizontally)
-        ) {
-            AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(image)
-                    .crossfade(true)
-                    .build(),
+    Column(modifier) {
+        Box {
+            var sizeImage by remember { mutableStateOf(IntSize.Zero) }
+            AsyncImage(model = ImageRequest.Builder(LocalContext.current).data(banner).crossfade(true).build(),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .fillMaxSize()
-                    .clip(RoundedCornerShape(8.dp))
+                    .background(Color.Transparent)
+                    .height(190.dp)
+                    .clip(RoundedCornerShape(16.dp))
+                    .onGloballyPositioned {
+                        sizeImage = it.size
+                    })
+            val gradient = Brush.verticalGradient(
+                colors = listOf(Color.Transparent, Color.Black),
+                startY = sizeImage.height.toFloat() / 16,
+                endY = sizeImage.height.toFloat()
             )
+            Box(
+                Modifier
+                    .fillMaxWidth()
+                    .height(100.dp)
+                    .align(Alignment.BottomStart)
+                    .background(Color.Transparent)
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(gradient)
+            )
+            Row {
+                AsyncImage(
+                    model = ImageRequest.Builder(LocalContext.current).data(image).crossfade(true).build(),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .align(Alignment.CenterVertically)
+                        .padding(start = 10.dp, top = 10.dp)
+                        .width(120.dp)
+                        .clip(RoundedCornerShape(8.dp))
+                )
+                Column(
+                    Modifier
+                        .align(Alignment.Bottom)
+                        .padding(start = 8.dp)
+                ) {
+                    Text(
+                        text = title,
+                        style = MaterialTheme.typography.titleMedium,
+                        maxLines = 2,
+                        color = Color.White,
+                        overflow = TextOverflow.Ellipsis,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier
+                    )
+                }
+            }
         }
-        Text(
-            text = title,
-            style = MaterialTheme.typography.bodyMedium,
-            maxLines = 2,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier
-                .padding(top = 8.dp)
-                .fillMaxWidth()
-        )
     }
 }
 
@@ -341,7 +398,9 @@ internal fun FeaturedMedia(
         MediaCarouselItem(
             id = media.mediaId,
             coverUrl = media.cover,
+            bannerUrl = media.banner,
             title = media.title,
+            format = stringResource(id = media.format.value),
             modifier = Modifier
                 .padding(4.dp)
                 .fillMaxHeight()
@@ -351,34 +410,74 @@ internal fun FeaturedMedia(
 
 @Composable
 private fun MediaCarouselItem(
-    modifier: Modifier = Modifier, id: Int, coverUrl: String? = null, title: String? = null
+    modifier: Modifier = Modifier,
+    id: Int,
+    coverUrl: String? = null,
+    bannerUrl: String? = null,
+    title: String? = null,
+    format: String? = null
 ) {
-    Column(modifier.padding(horizontal = 12.dp, vertical = 8.dp)) {
-        Box(
-            Modifier
-                .weight(1f)
-                .align(Alignment.CenterHorizontally)
-                .aspectRatio(1f)
-        ) {
-            if (coverUrl != null) {
-                AsyncImage(
-                    model = coverUrl,
+    Column {
+        Box {
+            if (bannerUrl != null) {
+                var sizeImage by remember { mutableStateOf(IntSize.Zero) }
+                AsyncImage(model = ImageRequest.Builder(LocalContext.current).data(bannerUrl).transformations(
+                    listOf(BlurTransformation(scale = 0.5f, radius = 20))
+                ).build(),
                     contentDescription = title,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .fillMaxSize()
-                        .clip(RoundedCornerShape(size = 8.dp))
+                        .onGloballyPositioned {
+                            sizeImage = it.size
+                        })
+                val gradient = Brush.verticalGradient(
+                    colors = listOf(Color.Transparent, Color.Black),
+                    startY = sizeImage.height.toFloat() / 3,
+                    endY = sizeImage.height.toFloat()
+                )
+                Box(
+                    Modifier
+                        .matchParentSize()
+                        .background(gradient)
                 )
             }
+            Row {
+                if (coverUrl != null) {
+                    AsyncImage(
+                        model = coverUrl,
+                        contentDescription = title,
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .padding(start = 16.dp, top = 16.dp, bottom = 16.dp)
+                            .width(120.dp)
+                            .clip(RoundedCornerShape(size = 8.dp))
+                    )
+                }
+                Column(
+                    Modifier
+                        .align(Alignment.Bottom)
+                        .padding(start = 8.dp)
+                ) {
+                    Text(
+                        text = title ?: String.unknown,
+                        color = Color.White,
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.padding(bottom = 0.dp)
+                    )
+                    Text(
+                        text = format ?: String.unknown,
+                        color = MaterialTheme.colorScheme.secondary,
+                        style = MaterialTheme.typography.titleMedium,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.padding(bottom = 25.dp)
+                    )
+                }
+            }
         }
-        Text(
-            text = title ?: String.unknown,
-            style = MaterialTheme.typography.labelLarge,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-            modifier = Modifier
-                .padding(top = 8.dp)
-                .align(Alignment.CenterHorizontally)
-        )
     }
 }

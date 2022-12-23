@@ -16,6 +16,8 @@
 
 package no.kij.tsuki.ui.login.view
 
+import android.net.Uri
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.LinearEasing
@@ -68,6 +70,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -333,11 +336,17 @@ private fun BeginRegisterButton(modifier: Modifier = Modifier) {
 @Composable
 private fun BeginLoginButton(modifier: Modifier = Modifier) {
     val uriHandler = LocalUriHandler.current
+    val context = LocalContext.current
 
     Button(
         modifier = modifier,
         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
-        onClick = { uriHandler.openUri(ANILIST_LOGIN) }
+        onClick = {
+            //uriHandler.openUri(ANILIST_LOGIN)
+            val builder = CustomTabsIntent.Builder()
+            val intent = builder.build()
+            intent.launchUrl(context, Uri.parse(ANILIST_LOGIN))
+        }
     ) {
         Text(
             text = stringResource(id = R.string.begin_login_button),

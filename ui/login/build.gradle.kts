@@ -32,4 +32,5 @@ dependencies {
     implementation(projects.ui.base)
     implementation(projects.domain.auth)
     implementation(projects.domain.user)
+    implementation(libs.androidx.browser)
 }
