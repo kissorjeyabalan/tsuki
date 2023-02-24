@@ -114,7 +114,7 @@ sentry-compose = { module = "io.sentry:sentry-compose-android", version.ref = "s
 sentry-timber = { module = "io.sentry:sentry-android-timber", version.ref = "sentry" }
 
 # serialization
-protobuf = { module = "org.jetbrains.kotlinx:kotlinx-serialization-protobuf", version = "1.4.1" }
+protobuf = { module = "org.jetbrains.kotlinx:kotlinx-serialization-protobuf", version = "1.5.0" }
 
 # crypto
 tink = { module = "com.google.crypto.tink:tink-android", version = "1.8.0" }
