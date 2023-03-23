@@ -1,5 +1,5 @@
 [versions]
-accompanist = "0.28.0"
+accompanist = "0.30.0"
 apollo = "3.7.5"
 agp = "7.4.2"
 coroutines = "1.6.4"
