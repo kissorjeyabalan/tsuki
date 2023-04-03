@@ -1,6 +1,6 @@
 [versions]
 accompanist = "0.30.0"
-apollo = "3.7.5"
+apollo = "3.8.0"
 agp = "7.4.2"
 coroutines = "1.6.4"
 compose = "2022.12.00"
