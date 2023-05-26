@@ -11,7 +11,7 @@ hiltx = "1.0.0"
 kotlin = "1.7.21"
 okhttp = "4.11.0"
 orbit = "4.6.1"
-sentry = "6.19.1"
+sentry = "6.20.0"
 sonarqube = "3.5.0.2730"
 
 [plugins]
