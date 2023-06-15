@@ -17,7 +17,7 @@
 plugins {
     id("tsuki.android.application")
     id("tsuki.sonarqube.android")
-    id("io.sentry.android.gradle") version "3.10.0"
+    id("io.sentry.android.gradle") version "3.11.0"
 }
 
 sentry {
