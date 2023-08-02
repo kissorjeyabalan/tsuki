@@ -2,7 +2,7 @@
 accompanist = "0.30.1"
 apollo = "3.8.2"
 agp = "7.4.2"
-coroutines = "1.7.2"
+coroutines = "1.7.3"
 compose = "2022.12.00"
 compose-compiler = "1.4.0-alpha02"
 destinations = "1.7.27-beta"
