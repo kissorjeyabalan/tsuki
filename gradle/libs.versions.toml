@@ -40,7 +40,7 @@ apollo-cache = { module = "com.apollographql.apollo3:apollo-normalized-cache", v
 apollo-cache-sql = { module = "com.apollographql.apollo3:apollo-normalized-cache-sqlite", version.ref = "apollo" }
 
 # arrow
-arrow = { module = "io.arrow-kt:arrow-core", version = "1.2.0" }
+arrow = { module = "io.arrow-kt:arrow-core", version = "1.2.4" }
 
 # Coil
 coil = { module = "io.coil-kt:coil-compose", version = "2.4.0" }
